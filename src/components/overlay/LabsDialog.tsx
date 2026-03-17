@@ -143,7 +143,7 @@ export function LabsDialog({ open, onOpenChange }: LabsDialogProps) {
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className="max-w-[1200px] sm:max-w-[1200px] w-[90vw] sm:w-[90vw] md:w-[80vw] lg:w-full h-[80vh] flex flex-col gap-0 p-0 overflow-hidden">
-        <DialogHeader className="px-6 pt-6 pb-4">
+        <DialogHeader className="px-6 pt-6 pb-4 text-left">
           <DialogTitle className="flex items-center gap-2 text-lg font-semibold text-text-primary">
             <FlaskConical className="h-5 w-5 text-accent-primary" />
             Labs
@@ -153,7 +153,7 @@ export function LabsDialog({ open, onOpenChange }: LabsDialogProps) {
           </DialogDescription>
         </DialogHeader>
         {/* Sticky filter + count bar */}
-        <div className="flex items-center justify-between gap-4 px-6 py-2 shrink-0">
+        <div className="flex items-center justify-between gap-4 p-6 shrink-0">
           <div className="relative flex-1 max-w-xs">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-text-secondary pointer-events-none z-10" />
             <Input
