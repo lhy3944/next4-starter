@@ -153,8 +153,8 @@ export function LabsDialog({ open, onOpenChange }: LabsDialogProps) {
           </DialogDescription>
         </DialogHeader>
         {/* Sticky filter + count bar */}
-        <div className="flex items-center justify-between gap-4 p-6 shrink-0">
-          <div className="relative flex-1 max-w-xs">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 p-6 shrink-0">
+          <div className="relative w-full sm:flex-1 sm:max-w-xs">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-text-secondary pointer-events-none z-10" />
             <Input
               type="text"

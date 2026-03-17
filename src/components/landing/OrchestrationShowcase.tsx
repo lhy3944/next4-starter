@@ -450,7 +450,7 @@ export function OrchestrationShowcase({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.4, ease: 'easeOut' }}
-                className='absolute inset-0 flex flex-col gap-4 pointer-events-auto'
+                className='absolute inset-0 flex flex-col gap-4 pointer-events-auto px-2'
               >
                 <h3 className='text-2xl font-bold tracking-tight text-text-primary'>
                   {activeModeData.title}
