@@ -1,14 +1,14 @@
-import { StoreProvider } from '@/components/providers/StoreProvider';
-import { TooltipProvider } from '@/components/ui/tooltip';
-import { fontVariables } from '@/lib/fonts';
-import type { Metadata } from 'next';
-import { ThemeProvider } from 'next-themes';
-import NextTopLoader from 'nextjs-toploader';
-import './globals.css';
+import { StoreProvider } from "@/components/providers/StoreProvider";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { fontVariables } from "@/lib/fonts";
+import type { Metadata } from "next";
+import { ThemeProvider } from "next-themes";
+import NextTopLoader from "nextjs-toploader";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: 'AISE+',
-  description: 'AI Agent Development Platform',
+  title: "AISE+",
+  description: "AI Agent Development Platform",
 };
 
 const themeScript = `
@@ -32,20 +32,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const topLoaderOptions = {
-    color: 'var(--accent-primary)',
+    color: "var(--accent-primary)",
     showSpinner: false,
     height: 2,
   };
 
   return (
-    <html lang='ko' suppressHydrationWarning>
+    <html lang="ko" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className={`${fontVariables} antialiased`}>
         <NextTopLoader {...topLoaderOptions} />
         <StoreProvider>
-          <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
             <TooltipProvider>{children}</TooltipProvider>
           </ThemeProvider>
         </StoreProvider>

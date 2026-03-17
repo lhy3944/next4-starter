@@ -1,11 +1,5 @@
-import { Header } from "@/components/layout/Header";
-import { ChatLayout } from "@/components/layout/ChatLayout";
+import { ChatArea } from "@/components/chat/ChatArea";
 
 export default function ChatPage() {
-  return (
-    <div className="flex h-screen flex-col">
-      <Header showLayoutToggle />
-      <ChatLayout />
-    </div>
-  );
+  return <ChatArea />;
 }
