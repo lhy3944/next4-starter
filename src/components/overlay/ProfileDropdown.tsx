@@ -1,0 +1,71 @@
+'use client';
+
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { LifeBuoy, LogOut, Settings, User } from 'lucide-react';
+import { useState } from 'react';
+
+interface ProfileDropdownProps {
+  onSettingsOpen: () => void;
+}
+
+export function ProfileDropdown({ onSettingsOpen }: ProfileDropdownProps) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <DropdownMenu open={open} onOpenChange={setOpen}>
+      <DropdownMenuTrigger asChild>
+        <button>
+          <Avatar className='h-8 w-8'>
+            <AvatarFallback className='bg-bg-surface text-text-primary text-sm font-medium'>
+              A
+            </AvatarFallback>
+          </Avatar>
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className='w-[280px]' align='end' sideOffset={8}>
+        <DropdownMenuLabel className='flex items-center gap-3 p-3'>
+          <Avatar className='h-10 w-10'>
+            <AvatarFallback className='bg-bg-surface text-text-primary font-medium'>
+              A
+            </AvatarFallback>
+          </Avatar>
+          <div className='flex flex-col'>
+            <span className='text-sm font-medium text-text-primary'>
+              Admin User
+            </span>
+            <span className='text-xs text-text-secondary'>admin@aise.com</span>
+          </div>
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem className='gap-2 px-3 py-2'>
+          <User className='h-4 w-4' />
+          <span>프로필</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          className='gap-2 px-3 py-2'
+          onSelect={() => onSettingsOpen()}
+        >
+          <Settings className='h-4 w-4' />
+          <span>환경 설정</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem className='gap-2 px-3 py-2'>
+          <LifeBuoy className='h-4 w-4' />
+          <span>지원</span>
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem className='gap-2 px-3 py-2 text-destructive'>
+          <LogOut className='h-4 w-4' />
+          <span>로그아웃</span>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}

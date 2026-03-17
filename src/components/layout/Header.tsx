@@ -1,0 +1,41 @@
+'use client';
+
+import { HeaderActions } from '@/components/layout/HeaderActions';
+import { HeaderTabs } from '@/components/layout/HeaderTabs';
+import { MobileMenu } from '@/components/layout/MobileMenu';
+import { Logo } from '@/components/shared/Logo';
+import { cn } from '@/lib/utils';
+import { usePanelStore } from '@/stores/panel-store';
+
+interface HeaderProps {
+  showLayoutToggle?: boolean;
+}
+
+export function Header({ showLayoutToggle = false }: HeaderProps) {
+  const fullWidthMode = usePanelStore((s) => s.fullWidthMode);
+
+  return (
+    <header
+      className={cn(
+        'sticky top-0 z-50 flex h-15 shrink-0 items-center justify-between border-b border-border-primary md:px-6 backdrop-blur-xl',
+      )}
+    >
+      <div
+        className={cn(
+          'w-full mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between transition-[max-width] duration-300 ease-in-out',
+          fullWidthMode ? 'max-w-full' : 'max-w-6xl',
+        )}
+      >
+        <div className='flex items-center'>
+          <Logo />
+        </div>
+
+        <HeaderTabs />
+        <div className='flex items-center gap-1'>
+          <HeaderActions showLayoutToggle={showLayoutToggle} />
+          <MobileMenu />
+        </div>
+      </div>
+    </header>
+  );
+}
