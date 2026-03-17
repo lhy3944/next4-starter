@@ -52,7 +52,7 @@ export function LeftSidebar() {
             <div className="flex items-center justify-between">
               <Button
                 onClick={createThread}
-                className="flex items-center gap-1.5 text-text-primary"
+                className="flex items-center gap-1.5 text-fg-primary"
                 variant="ghost"
               >
                 <Plus className="h-5 w-5" />
@@ -71,7 +71,7 @@ export function LeftSidebar() {
             {/* 대화 목록 */}
             <ThreadList />
 
-            <div className="mt-auto flex items-center justify-center gap-4 border-t border-border-primary pt-3">
+            <div className="mt-auto flex items-center justify-center gap-4 border-t border-line-primary pt-3">
               {bottomIcons.map(({ icon: Icon, label }) => (
                 <Button
                   key={label}

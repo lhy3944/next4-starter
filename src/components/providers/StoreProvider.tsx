@@ -5,16 +5,16 @@ import { usePanelStore } from '@/stores/panel-store';
 
 function LoadingScreen() {
   return (
-    <div className='flex h-screen w-full items-center justify-center bg-bg-primary'>
+    <div className='flex h-screen w-full items-center justify-center bg-canvas-primary'>
       <div className='flex flex-col items-center gap-4'>
         <div className='relative flex items-center'>
-          <span className='text-3xl font-bold text-text-primary'>AISE</span>
-          <span className='absolute -right-4 -top-1.5 text-xl font-bold text-text-primary'>
+          <span className='text-3xl font-bold text-fg-primary'>AISE</span>
+          <span className='absolute -right-4 -top-1.5 text-xl font-bold text-fg-primary'>
             +
           </span>
         </div>
-        <div className='h-1 w-24 overflow-hidden rounded-full bg-border-primary'>
-          <div className='h-full w-1/2 animate-shimmer rounded-full bg-text-muted' />
+        <div className='h-1 w-24 overflow-hidden rounded-full bg-line-primary'>
+          <div className='h-full w-1/2 animate-shimmer rounded-full bg-fg-muted' />
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ import { OrchestrationShowcase } from '@/components/landing/OrchestrationShowcas
 
 export default function LandingPage() {
   return (
-    <div className='flex min-h-screen flex-col bg-bg-primary'>
+    <div className='flex min-h-screen flex-col bg-canvas-primary'>
       <Header showLayoutToggle={true} />
       <main className='flex flex-1 flex-col'>
         <HeroSection />

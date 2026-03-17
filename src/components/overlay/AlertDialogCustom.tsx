@@ -41,11 +41,11 @@ export function AlertDialogCustom({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-[420px]">
         <DialogHeader className="flex flex-col items-center gap-3 text-center">
-          <div className={`flex h-12 w-12 items-center justify-center rounded-full bg-bg-surface ${config.className}`}>
+          <div className={`flex h-12 w-12 items-center justify-center rounded-full bg-canvas-surface ${config.className}`}>
             <Icon className="h-6 w-6" />
           </div>
-          <DialogTitle className="text-text-primary">{title}</DialogTitle>
-          <DialogDescription className="text-text-secondary">
+          <DialogTitle className="text-fg-primary">{title}</DialogTitle>
+          <DialogDescription className="text-fg-secondary">
             {description}
           </DialogDescription>
         </DialogHeader>

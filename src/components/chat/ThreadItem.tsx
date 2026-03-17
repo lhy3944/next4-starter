@@ -32,8 +32,8 @@ export function ThreadItem({ thread, isActive, onClick }: ThreadItemProps) {
       className={cn(
         "group relative flex w-full items-center rounded-sm transition-colors pr-2",
         isActive
-          ? "bg-bg-surface text-text-primary"
-          : "text-text-secondary hover:bg-bg-surface/50",
+          ? "bg-canvas-surface text-fg-primary"
+          : "text-fg-secondary hover:bg-canvas-surface/50",
       )}
     >
       <button
@@ -49,7 +49,7 @@ export function ThreadItem({ thread, isActive, onClick }: ThreadItemProps) {
           <button
             onClick={(e) => e.stopPropagation()}
             className={cn(
-              "shrink-0 p-1 rounded text-text-secondary hover:text-text-primary transition-opacity cursor-pointer",
+              "shrink-0 p-1 rounded text-fg-secondary hover:text-fg-primary transition-opacity cursor-pointer",
               menuOpen ? "opacity-100" : "opacity-0 group-hover:opacity-100",
             )}
           >

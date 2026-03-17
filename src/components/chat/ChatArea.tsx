@@ -7,7 +7,7 @@ export function ChatArea() {
   return (
     <div className="flex flex-1 flex-col items-center justify-center gap-6">
       <PanelToggleBar />
-      <h1 className="text-4xl font-bold text-text-primary">AISE 3.0</h1>
+      <h1 className="text-4xl font-bold text-fg-primary">AISE 3.0</h1>
       <ChatInput />
     </div>
   );

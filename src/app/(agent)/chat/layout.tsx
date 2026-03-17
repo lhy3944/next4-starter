@@ -50,7 +50,7 @@ export default function ChatLayout({
         {/* Sidebar divider */}
         <div
           className={cn(
-            "h-full w-px shrink-0 bg-border-primary transition-opacity duration-300",
+            "h-full w-px shrink-0 bg-line-primary transition-opacity duration-300",
             showSidebar ? "opacity-100" : "opacity-0",
           )}
         />
@@ -70,7 +70,7 @@ export default function ChatLayout({
         {/* RightPanel */}
         <div
           className={cn(
-            "h-full shrink-0 overflow-hidden border-l border-border-primary",
+            "h-full shrink-0 overflow-hidden border-l border-line-primary",
             isResizing
               ? "transition-none"
               : "transition-[width] duration-300 ease-in-out",

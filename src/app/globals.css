@@ -35,15 +35,15 @@
   --radius-4xl: calc(var(--radius) + 16px);
 
   /* AISE+ design tokens */
-  --color-bg-primary: var(--bg-primary);
-  --color-bg-secondary: var(--bg-secondary);
-  --color-bg-surface: var(--bg-surface);
-  --color-bg-input: var(--bg-input);
-  --color-border-primary: var(--border-primary);
-  --color-border-subtle: var(--border-subtle);
-  --color-text-primary: var(--text-primary);
-  --color-text-secondary: var(--text-secondary);
-  --color-text-muted: var(--text-muted);
+  --color-canvas-primary: var(--bg-primary);
+  --color-canvas-secondary: var(--bg-secondary);
+  --color-canvas-surface: var(--bg-surface);
+  --color-canvas-input: var(--bg-input);
+  --color-line-primary: var(--border-primary);
+  --color-line-subtle: var(--border-subtle);
+  --color-fg-primary: var(--text-primary);
+  --color-fg-secondary: var(--text-secondary);
+  --color-fg-muted: var(--text-muted);
   --color-accent-primary: var(--accent-primary);
   --color-icon-default: var(--icon-default);
   --color-icon-active: var(--icon-active);
@@ -174,7 +174,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-bg-primary text-text-primary;
+    @apply bg-canvas-primary text-fg-primary;
     font-family: var(--font-blink), var(--font-pretendard), sans-serif;
   }
   button:not(:disabled),

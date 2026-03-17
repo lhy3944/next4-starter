@@ -144,18 +144,18 @@ export function LabsDialog({ open, onOpenChange }: LabsDialogProps) {
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className="max-w-[1200px] sm:max-w-[1200px] w-[90vw] sm:w-[90vw] md:w-[80vw] lg:w-full h-[80vh] flex flex-col gap-0 p-0 overflow-hidden">
         <DialogHeader className="px-6 pt-6 pb-4 text-left">
-          <DialogTitle className="flex items-center gap-2 text-lg font-semibold text-text-primary">
+          <DialogTitle className="flex items-center gap-2 text-lg font-semibold text-fg-primary">
             <FlaskConical className="h-5 w-5 text-accent-primary" />
             Labs
           </DialogTitle>
-          <DialogDescription className="text-text-secondary">
+          <DialogDescription className="text-fg-secondary">
             실험적 기능을 미리 체험해보세요.
           </DialogDescription>
         </DialogHeader>
         {/* Sticky filter + count bar */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 p-6 shrink-0">
           <div className="relative w-full sm:flex-1 sm:max-w-xs">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-text-secondary pointer-events-none z-10" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-fg-secondary pointer-events-none z-10" />
             <Input
               type="text"
               value={searchQuery}
@@ -164,8 +164,8 @@ export function LabsDialog({ open, onOpenChange }: LabsDialogProps) {
               className="pl-8 h-10"
             />
           </div>
-          <span className="text-xs text-text-secondary whitespace-nowrap">
-            <span className="text-text-primary font-semibold mr-1">
+          <span className="text-xs text-fg-secondary whitespace-nowrap">
+            <span className="text-fg-primary font-semibold mr-1">
               {labFeatures.length}
             </span>
             개의 실험이 세상을 바꿀 준비를 하고 있습니다.
@@ -192,15 +192,15 @@ export function LabsDialog({ open, onOpenChange }: LabsDialogProps) {
                 variants={cardVariants}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => window.open(feature.link || "#", "_blank")}
-                className="group flex flex-col justify-between rounded-xl border border-border-primary p-5 transition-colors duration-200 cursor-pointer text-left hover:bg-bg-secondary focus:outline-none h-full"
+                className="group flex flex-col justify-between rounded-xl border border-line-primary p-5 transition-colors duration-200 cursor-pointer text-left hover:bg-canvas-secondary focus:outline-none h-full"
               >
                 <div className="flex flex-col gap-3">
                   <div className="flex items-start justify-between">
                     <div className="flex flex-col gap-1">
-                      <span className="text-sm font-semibold text-text-primary">
+                      <span className="text-sm font-semibold text-fg-primary">
                         {feature.name}
                       </span>
-                      <div className="flex items-center gap-1.5 text-xs text-text-secondary">
+                      <div className="flex items-center gap-1.5 text-xs text-fg-secondary">
                         <Badge
                           variant="secondary"
                           className="text-[10px] px-1.5 py-0"
@@ -215,12 +215,12 @@ export function LabsDialog({ open, onOpenChange }: LabsDialogProps) {
                       <feature.icon className="w-6 h-6 group-hover:scale-125 transition-transform duration-200" />
                     </div>
                   </div>
-                  <span className="text-sm text-text-secondary leading-relaxed line-clamp-3">
+                  <span className="text-sm text-fg-secondary leading-relaxed line-clamp-3">
                     {feature.description}
                   </span>
                 </div>
                 <div className="mt-4 flex justify-end">
-                  <ExternalLink className="w-4 h-4 text-text-secondary opacity-50 group-hover:opacity-100 group-hover:scale-125 transition-all duration-200" />
+                  <ExternalLink className="w-4 h-4 text-fg-secondary opacity-50 group-hover:opacity-100 group-hover:scale-125 transition-all duration-200" />
                 </div>
               </motion.button>
             ))}

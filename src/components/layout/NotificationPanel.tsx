@@ -31,8 +31,8 @@ export function NotificationPanel() {
         <DrawerDescription />
         <DrawerHeader className='flex flex-row items-center justify-between border-b border-muted px-4 py-5'>
           <div className='flex items-center gap-2'>
-            <Bell className='h-5 w-5 text-text-primary' />
-            <DrawerTitle className='text-sm font-semibold text-text-primary'>
+            <Bell className='h-5 w-5 text-fg-primary' />
+            <DrawerTitle className='text-sm font-semibold text-fg-primary'>
               Notifications
             </DrawerTitle>
           </div>
@@ -42,7 +42,7 @@ export function NotificationPanel() {
         </DrawerHeader>
         <ScrollArea className='flex-1'>
           <div className='flex h-full min-h-[200px] items-center justify-center'>
-            <span className='text-sm text-text-muted'>No notifications</span>
+            <span className='text-sm text-fg-muted'>No notifications</span>
           </div>
         </ScrollArea>
       </DrawerContent>

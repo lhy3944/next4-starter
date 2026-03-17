@@ -50,9 +50,9 @@ const agents = [
 export function AgentShowcase() {
   return (
     <section className='flex flex-col items-center gap-2.5 px-4 sm:px-8 md:px-12 pb-6'>
-      <div className='flex items-center gap-2 rounded-full border border-border-subtle px-4 py-1.5'>
+      <div className='flex items-center gap-2 rounded-full border border-line-subtle px-4 py-1.5'>
         <span className='h-1.5 w-1.5 rounded-full bg-accent-primary' />
-        <span className='text-xs tracking-wide text-text-secondary'>
+        <span className='text-xs tracking-wide text-fg-secondary'>
           AI Agents
         </span>
       </div>

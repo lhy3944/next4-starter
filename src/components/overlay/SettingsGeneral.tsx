@@ -17,10 +17,10 @@ export function SettingsGeneral() {
   return (
     <div className='flex flex-col gap-6'>
       <div>
-        <h3 className='text-sm font-semibold text-text-primary mb-4'>일반</h3>
+        <h3 className='text-sm font-semibold text-fg-primary mb-4'>일반</h3>
         <div className='flex flex-col gap-4'>
           <div className='flex items-center justify-between'>
-            <Label className='text-sm text-text-secondary'>언어</Label>
+            <Label className='text-sm text-fg-secondary'>언어</Label>
             <Select defaultValue='ko'>
               <SelectTrigger className='w-[160px]'>
                 <SelectValue />
@@ -32,7 +32,7 @@ export function SettingsGeneral() {
             </Select>
           </div>
           <div className='flex items-center justify-between'>
-            <Label className='text-sm text-text-secondary'>다크 모드</Label>
+            <Label className='text-sm text-fg-secondary'>다크 모드</Label>
             <Switch
               checked={resolvedTheme === 'dark'}
               onCheckedChange={() =>
@@ -44,23 +44,23 @@ export function SettingsGeneral() {
       </div>
 
       <div>
-        <h3 className='text-sm font-semibold text-text-primary mb-4'>알림</h3>
+        <h3 className='text-sm font-semibold text-fg-primary mb-4'>알림</h3>
         <div className='flex flex-col gap-4'>
           <div className='flex items-center justify-between'>
-            <Label className='text-sm text-text-secondary'>데스크톱 알림</Label>
+            <Label className='text-sm text-fg-secondary'>데스크톱 알림</Label>
             <Switch defaultChecked />
           </div>
           <div className='flex items-center justify-between'>
-            <Label className='text-sm text-text-secondary'>이메일 알림</Label>
+            <Label className='text-sm text-fg-secondary'>이메일 알림</Label>
             <Switch />
           </div>
         </div>
       </div>
 
       <div>
-        <h3 className='text-sm font-semibold text-text-primary mb-4'>모델</h3>
+        <h3 className='text-sm font-semibold text-fg-primary mb-4'>모델</h3>
         <div className='flex items-center justify-between'>
-          <Label className='text-sm text-text-secondary'>기본 모델</Label>
+          <Label className='text-sm text-fg-secondary'>기본 모델</Label>
           <Select defaultValue='gpt-4o'>
             <SelectTrigger className='w-[160px]'>
               <SelectValue />

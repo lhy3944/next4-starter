@@ -19,12 +19,12 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-[640px] h-[520px] flex flex-col gap-0 p-0">
         <DialogHeader className="px-6 pt-6 pb-4">
-          <DialogTitle className="text-lg font-semibold text-text-primary">
+          <DialogTitle className="text-lg font-semibold text-fg-primary">
             환경 설정
           </DialogTitle>
         </DialogHeader>
         <Tabs defaultValue="general" className="flex-1 flex flex-col overflow-hidden">
-          <TabsList className="mx-6 justify-start bg-transparent border-b border-border-primary rounded-none h-auto p-0 gap-4">
+          <TabsList className="mx-6 justify-start bg-transparent border-b border-line-primary rounded-none h-auto p-0 gap-4">
             <TabsTrigger
               value="general"
               className="rounded-none border-b-2 border-transparent data-[state=active]:border-accent-primary data-[state=active]:bg-transparent px-1 pb-2 text-sm"
@@ -48,10 +48,10 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
             <SettingsGeneral />
           </TabsContent>
           <TabsContent value="shortcuts" className="flex-1 overflow-y-auto px-6 py-4 mt-0">
-            <p className="text-sm text-text-muted">단축키 설정 (준비 중)</p>
+            <p className="text-sm text-fg-muted">단축키 설정 (준비 중)</p>
           </TabsContent>
           <TabsContent value="advanced" className="flex-1 overflow-y-auto px-6 py-4 mt-0">
-            <p className="text-sm text-text-muted">고급 설정 (준비 중)</p>
+            <p className="text-sm text-fg-muted">고급 설정 (준비 중)</p>
           </TabsContent>
         </Tabs>
       </DialogContent>

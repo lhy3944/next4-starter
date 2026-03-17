@@ -8,14 +8,14 @@ interface AgentCardProps {
 
 export function AgentCard({ icon: Icon, name, description }: AgentCardProps) {
   return (
-    <div className='group flex flex-col gap-3 rounded-xl border border-border-subtle p-6 transition-colors duration-200 hover:bg-card hover:border-accent-primary'>
+    <div className='group flex flex-col gap-3 rounded-xl border border-line-subtle p-6 transition-colors duration-200 hover:bg-card hover:border-accent-primary'>
       <div className='flex items-center gap-3'>
-        <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary dark:bg-bg-surface '>
+        <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary dark:bg-canvas-surface '>
           <Icon className='h-5 w-5 text-white transition-transform duration-200 group-hover:scale-125 ' />
         </div>
-        <h3 className='text-sm font-semibold text-text-primary'>{name}</h3>
+        <h3 className='text-sm font-semibold text-fg-primary'>{name}</h3>
       </div>
-      <p className='text-sm leading-relaxed text-text-secondary font-medium'>
+      <p className='text-sm leading-relaxed text-fg-secondary font-medium'>
         {description}
       </p>
       <div className='flex flex-1 items-end gap-1.5'>

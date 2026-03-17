@@ -134,7 +134,7 @@ export function ThreadList() {
       <div
         ref={thumbRef}
         onMouseDown={handleThumbMouseDown}
-        className="absolute right-0 w-1.5 rounded-full bg-text-muted hover:bg-text-secondary cursor-pointer transition-opacity duration-300"
+        className="absolute right-0 w-1.5 rounded-full bg-fg-muted hover:bg-fg-secondary cursor-pointer transition-opacity duration-300"
         style={{ opacity: 0 }}
       />
     </div>

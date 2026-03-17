@@ -24,7 +24,7 @@ export function ProfileDropdown({ onSettingsOpen }: ProfileDropdownProps) {
       <DropdownMenuTrigger asChild>
         <button>
           <Avatar className='h-8 w-8'>
-            <AvatarFallback className='bg-bg-surface text-text-primary text-sm font-medium'>
+            <AvatarFallback className='bg-canvas-surface text-fg-primary text-sm font-medium'>
               A
             </AvatarFallback>
           </Avatar>
@@ -33,15 +33,15 @@ export function ProfileDropdown({ onSettingsOpen }: ProfileDropdownProps) {
       <DropdownMenuContent className='w-[280px]' align='end' sideOffset={8}>
         <DropdownMenuLabel className='flex items-center gap-3 p-3'>
           <Avatar className='h-10 w-10'>
-            <AvatarFallback className='bg-bg-surface text-text-primary font-medium'>
+            <AvatarFallback className='bg-canvas-surface text-fg-primary font-medium'>
               A
             </AvatarFallback>
           </Avatar>
           <div className='flex flex-col'>
-            <span className='text-sm font-medium text-text-primary'>
+            <span className='text-sm font-medium text-fg-primary'>
               Admin User
             </span>
-            <span className='text-xs text-text-secondary'>admin@aise.com</span>
+            <span className='text-xs text-fg-secondary'>admin@aise.com</span>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />

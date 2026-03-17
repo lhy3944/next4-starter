@@ -62,15 +62,15 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
             문서, 메뉴명을 검색하세요.
           </DialogDescription>
         </DialogHeader>
-        <div className='flex items-center gap-3 border-b border-border-primary px-4 py-3'>
-          <Search className='h-5 w-5 shrink-0 text-text-muted' />
+        <div className='flex items-center gap-3 border-b border-line-primary px-4 py-3'>
+          <Search className='h-5 w-5 shrink-0 text-fg-muted' />
           <Input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder='검색어를 입력하세요...'
             className='border-0 bg-transparent text-sm shadow-none focus-visible:ring-0'
           />
-          <kbd className='pointer-events-none shrink-0 rounded border border-border-primary bg-bg-surface px-1.5 py-0.5 text-[10px] text-text-muted'>
+          <kbd className='pointer-events-none shrink-0 rounded border border-line-primary bg-canvas-surface px-1.5 py-0.5 text-[10px] text-fg-muted'>
             ESC
           </kbd>
         </div>
@@ -78,30 +78,30 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
           {!query && (
             <>
               <div className='px-2 py-1.5'>
-                <span className='text-xs font-medium text-text-muted'>
+                <span className='text-xs font-medium text-fg-muted'>
                   최근 검색
                 </span>
               </div>
               {recentSearches.map((item) => (
                 <button
                   key={item.label}
-                  className='flex w-full items-center gap-3 rounded-md px-2 py-2 text-sm text-text-secondary hover:bg-bg-surface transition-colors'
+                  className='flex w-full items-center gap-3 rounded-md px-2 py-2 text-sm text-fg-secondary hover:bg-canvas-surface transition-colors'
                 >
-                  <item.icon className='h-4 w-4 shrink-0 text-text-muted' />
+                  <item.icon className='h-4 w-4 shrink-0 text-fg-muted' />
                   <span>{item.label}</span>
                 </button>
               ))}
               <div className='px-2 py-1.5 mt-2'>
-                <span className='text-xs font-medium text-text-muted'>
+                <span className='text-xs font-medium text-fg-muted'>
                   추천
                 </span>
               </div>
               {suggestions.map((item) => (
                 <button
                   key={item.label}
-                  className='flex w-full items-center gap-3 rounded-md px-2 py-2 text-sm text-text-secondary hover:bg-bg-surface transition-colors'
+                  className='flex w-full items-center gap-3 rounded-md px-2 py-2 text-sm text-fg-secondary hover:bg-canvas-surface transition-colors'
                 >
-                  <item.icon className='h-4 w-4 shrink-0 text-text-muted' />
+                  <item.icon className='h-4 w-4 shrink-0 text-fg-muted' />
                   <span>{item.label}</span>
                 </button>
               ))}
@@ -109,7 +109,7 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
           )}
           {query && (
             <div className='flex h-full items-center justify-center'>
-              <span className='text-sm text-text-primary'>
+              <span className='text-sm text-fg-primary'>
                 &quot;{query}&quot;에 대한 결과가 없습니다
               </span>
             </div>

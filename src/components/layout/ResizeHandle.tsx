@@ -10,7 +10,7 @@ export function ResizeHandle({ onPointerDown }: ResizeHandleProps) {
       onPointerDown={onPointerDown}
       className="group flex w-1 cursor-col-resize items-center justify-center hover:w-2 transition-all"
     >
-      <div className="h-full w-px bg-border-primary group-hover:bg-accent-primary transition-colors" />
+      <div className="h-full w-px bg-line-primary group-hover:bg-accent-primary transition-colors" />
     </div>
   );
 }

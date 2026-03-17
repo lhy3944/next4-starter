@@ -36,8 +36,8 @@ export function ConfirmDialog({
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent className="max-w-[420px]">
         <AlertDialogHeader>
-          <AlertDialogTitle className="text-text-primary">{title}</AlertDialogTitle>
-          <AlertDialogDescription className="text-text-secondary">
+          <AlertDialogTitle className="text-fg-primary">{title}</AlertDialogTitle>
+          <AlertDialogDescription className="text-fg-secondary">
             {description}
           </AlertDialogDescription>
         </AlertDialogHeader>

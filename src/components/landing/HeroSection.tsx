@@ -8,11 +8,11 @@ export function HeroSection() {
   return (
     <section className='flex flex-col items-center gap-7 px-12 py-12'>
       <div className='flex flex-col items-center gap-5'>
-        <h1 className='text-center text-6xl font-semibold tracking-wide text-text-primary'>
+        <h1 className='text-center text-6xl font-semibold tracking-wide text-fg-primary'>
           Introducing AISE
           <AuroraText className='absolute bottom-6 left-1'>+</AuroraText>
         </h1>
-        <div className='max-w-[560px] text-center text-md font-semibold leading-relaxed text-text-secondary'>
+        <div className='max-w-[560px] text-center text-md font-semibold leading-relaxed text-fg-secondary'>
           <TextAnimate animation='slideLeft' by='character'>
             AI 에이전트와 함께 개발 프로세스를 최적화하여
           </TextAnimate>
@@ -43,7 +43,7 @@ export function HeroSection() {
         {/* <Button
           variant='outline'
           size='lg'
-          className='gap-2 rounded-lg border-border-primary px-7'
+          className='gap-2 rounded-lg border-line-primary px-7'
         >
           <Play className='h-4 w-4' />
           Watch Demo

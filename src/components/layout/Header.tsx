@@ -17,7 +17,7 @@ export function Header({ showLayoutToggle = false }: HeaderProps) {
   return (
     <header
       className={cn(
-        'sticky top-0 z-50 flex h-15 shrink-0 items-center justify-between border-b border-border-primary md:px-6 backdrop-blur-xl',
+        'sticky top-0 z-50 flex h-15 shrink-0 items-center justify-between border-b border-line-primary md:px-6 backdrop-blur-xl',
       )}
     >
       <div

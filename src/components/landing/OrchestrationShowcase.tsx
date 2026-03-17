@@ -79,7 +79,7 @@ export function OrchestrationShowcase({
   const activeModeData = MODES.find((m) => m.id === activeMode) || MODES[0];
 
   return (
-    <section className='w-full py-16 px-4 bg-bg-primary text-text-primary transition-colors duration-300'>
+    <section className='w-full py-16 px-4 bg-canvas-primary text-fg-primary transition-colors duration-300'>
       <div className='max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-24'>
         {/* === 좌측: SVG 애니메이션 영역 === */}
         <div className='relative w-full max-w-md lg:w-1/2 flex justify-center items-center'>
@@ -315,7 +315,7 @@ export function OrchestrationShowcase({
               y={CENTER_NODE.y}
               textAnchor='middle'
               dominantBaseline='middle'
-              className='text-sm font-bold fill-text-primary'
+              className='text-sm font-bold fill-fg-primary'
             >
               {CENTER_NODE.label}
             </text>
@@ -353,7 +353,7 @@ export function OrchestrationShowcase({
                   ? 'text-teal-500 dark:text-teal-400'
                   : isActiveInVal
                     ? 'text-purple-500 dark:text-purple-400'
-                    : 'text-border-primary dark:text-border-subtle';
+                    : 'text-line-primary dark:text-line-subtle';
 
               return (
                 <motion.g
@@ -393,7 +393,7 @@ export function OrchestrationShowcase({
                     x={node.x}
                     y={node.y - 40}
                     textAnchor='middle'
-                    className={`text-xs font-semibold ${isActive ? 'fill-text-primary' : 'fill-text-secondary'}`}
+                    className={`text-xs font-semibold ${isActive ? 'fill-fg-primary' : 'fill-fg-secondary'}`}
                   >
                     {node.label}
                   </text>
@@ -403,7 +403,7 @@ export function OrchestrationShowcase({
           </svg>
 
           {/* 모바일 화면을 위해 하단에 현재 모드 이름 표기 (데스크탑에선 생략) */}
-          <div className='absolute bottom-[-10px] tracking-[0.2em] text-sm font-bold text-text-muted uppercase lg:hidden'>
+          <div className='absolute bottom-[-10px] tracking-[0.2em] text-sm font-bold text-fg-muted uppercase lg:hidden'>
             {activeModeData.title}
           </div>
         </div>
@@ -411,7 +411,7 @@ export function OrchestrationShowcase({
         {/* === 우측: 조작부 및 텍스트 전환 영역 === */}
         <div className='w-full flex-1 lg:max-w-xl flex flex-col items-center lg:items-start space-y-8 z-10'>
           {/* 모드 선택기 버튼형 탭 (글씨가 길어져서 레이아웃 조정) */}
-          <div className='flex flex-wrap justify-center lg:justify-start gap-1 bg-bg-secondary p-1 rounded-3xl w-fit'>
+          <div className='flex flex-wrap justify-center lg:justify-start gap-1 bg-canvas-secondary p-1 rounded-3xl w-fit'>
             {MODES.map((mode) => {
               const isActive = activeMode === mode.id;
               return (
@@ -420,14 +420,14 @@ export function OrchestrationShowcase({
                   onClick={() => setActiveMode(mode.id)}
                   className={`relative px-4 sm:px-6 py-2.5 text-xs sm:text-sm font-semibold transition-colors duration-200 z-10 whitespace-nowrap rounded-full ${
                     isActive
-                      ? 'text-bg-primary'
-                      : 'text-text-secondary hover:text-text-primary'
+                      ? 'text-canvas-primary'
+                      : 'text-fg-secondary hover:text-fg-primary'
                   }`}
                 >
                   {isActive && (
                     <motion.div
                       layoutId='showcase-active-tab'
-                      className='absolute inset-0 bg-text-primary rounded-full -z-10'
+                      className='absolute inset-0 bg-fg-primary rounded-full -z-10'
                       transition={{
                         type: 'spring',
                         stiffness: 300,
@@ -452,17 +452,17 @@ export function OrchestrationShowcase({
                 transition={{ duration: 0.4, ease: 'easeOut' }}
                 className='absolute inset-0 flex flex-col gap-4 pointer-events-auto px-2'
               >
-                <h3 className='text-2xl font-bold tracking-tight text-text-primary'>
+                <h3 className='text-2xl font-bold tracking-tight text-fg-primary'>
                   {activeModeData.title}
                 </h3>
-                <p className='text-md text-text-secondary break-keep'>
+                <p className='text-md text-fg-secondary break-keep'>
                   {activeModeData.description}
                 </p>
                 <div className='flex flex-wrap gap-2 sm:gap-3 justify-center lg:justify-start mt-2'>
                   {activeModeData.badges.map((badge, idx) => (
                     <span
                       key={idx}
-                      className='px-3 py-1 rounded-full border border-border-primary bg-bg-primary text-xs font-medium text-text-secondary whitespace-nowrap'
+                      className='px-3 py-1 rounded-full border border-line-primary bg-canvas-primary text-xs font-medium text-fg-secondary whitespace-nowrap'
                     >
                       {badge}
                     </span>

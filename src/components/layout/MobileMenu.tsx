@@ -34,7 +34,7 @@ export function MobileMenu() {
           <Button
             variant='ghost'
             size='icon'
-            className='lg:hidden text-icon-default hover:text-icon-active hover:bg-bg-surface'
+            className='lg:hidden text-icon-default hover:text-icon-active hover:bg-canvas-surface'
           >
             <Menu className='h-5 w-5' />
             <span className='sr-only'>Toggle Menu</span>
@@ -42,9 +42,9 @@ export function MobileMenu() {
         </SheetTrigger>
         <SheetContent
           side='left'
-          className='w-[280px] sm:w-[320px] p-0 flex flex-col border-r-border-primary bg-bg-primary'
+          className='w-[280px] sm:w-[320px] p-0 flex flex-col border-r-line-primary bg-canvas-primary'
         >
-          <SheetHeader className='p-4 border-b border-border-primary text-left'>
+          <SheetHeader className='p-4 border-b border-line-primary text-left'>
             <SheetTitle asChild>
               <div
                 onClick={() => setOpen(false)}
@@ -63,10 +63,10 @@ export function MobileMenu() {
                   href={tab.href}
                   onClick={() => setOpen(false)}
                   className={cn(
-                    'flex items-center gap-3 px-6 py-4 text-sm font-medium transition-colors hover:bg-bg-secondary hover:text-text-primary',
+                    'flex items-center gap-3 px-6 py-4 text-sm font-medium transition-colors hover:bg-canvas-secondary hover:text-fg-primary',
                     isActive
-                      ? 'bg-bg-surface text-accent-primary border-r-4 border-accent-primary'
-                      : 'text-text-secondary',
+                      ? 'bg-canvas-surface text-accent-primary border-r-4 border-accent-primary'
+                      : 'text-fg-secondary',
                   )}
                 >
                   <tab.icon
@@ -78,7 +78,7 @@ export function MobileMenu() {
             })}
           </div>
 
-          <div className='p-4 border-t border-border-primary flex items-center gap-2'>
+          <div className='p-4 border-t border-line-primary flex items-center gap-2'>
             <AppsDropdown contentClassName='bottom-12 left-0 origin-bottom-left' />
             <LabsTrigger onClick={() => setLabsOpen(true)} />
             <ThemeToggle
