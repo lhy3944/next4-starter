@@ -54,7 +54,7 @@ jobs:
 
     steps:
       - name: docker-compose.yml 배포
-        uses: appleboy/ssh-action@v0.1.7
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
