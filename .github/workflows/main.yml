@@ -53,6 +53,16 @@ jobs:
     needs: build-and-push # 빌드 완료 후 실행
 
     steps:
+      - name: docker-compose.yml 배포
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT }}
+          source: "docker-compose.yml"
+          target: "/var/www/next4-starter"
+
       - name: VPS에 SSH 접속 후 배포
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -74,12 +84,3 @@ jobs:
 
             # 사용하지 않는 이미지 정리
             docker image prune -f
-      - name: docker-compose.yml 배포
-        uses: appleboy/ssh-action@v0.1.7
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          port: ${{ secrets.VPS_PORT }}
-          source: "docker-compose.yml"
-          target: "/var/www/next4-starter"
