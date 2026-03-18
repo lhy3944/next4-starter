@@ -6,6 +6,7 @@ import { useResponsivePanel } from "@/hooks/useMediaQuery";
 import { useResize } from "@/hooks/useResize";
 import { Header } from "@/components/layout/Header";
 import { LeftSidebar } from "@/components/layout/LeftSidebar";
+import { MobileSidebarDrawer } from "@/components/layout/MobileSidebarDrawer";
 import { RightPanel } from "@/components/layout/RightPanel";
 import { ResizeHandle } from "@/components/layout/ResizeHandle";
 import { NotificationPanel } from "@/components/layout/NotificationPanel";
@@ -36,6 +37,13 @@ export default function ChatLayout({
       <Header showLayoutToggle />
 
       <div ref={containerRef} className="flex flex-1 overflow-hidden">
+        {/* Mobile sidebar buttons */}
+        {isMobile && (
+          <div className="absolute top-[calc(var(--spacing)*15+1px)] left-2 z-40">
+            <MobileSidebarDrawer />
+          </div>
+        )}
+
         {/* LeftSidebar */}
         <div
           className={cn(

@@ -81,7 +81,13 @@ export const usePanelStore = create<PanelState>()(persist((set, get) => ({
     const isTablet = width >= 768 && width < 1024;
     const state = get();
 
-    if (isMobile) {
+    // Only adjust sidebar state when the viewport category actually changes
+    const wasMobile = state.isMobile;
+    const wasTablet = state.isTablet;
+    const wasDesktop = !wasMobile && !wasTablet;
+    const isDesktop = !isMobile && !isTablet;
+
+    if (isMobile && !wasMobile) {
       set({
         isMobile: true,
         isTablet: false,
@@ -90,14 +96,14 @@ export const usePanelStore = create<PanelState>()(persist((set, get) => ({
         rightPanelOpen: false,
         notificationOpen: false,
       });
-    } else if (isTablet) {
+    } else if (isTablet && !wasTablet) {
       set({
         isMobile: false,
         isTablet: true,
         previousLeftSidebar: state.leftSidebarOpen || state.previousLeftSidebar,
         leftSidebarOpen: false,
       });
-    } else {
+    } else if (isDesktop && !wasDesktop) {
       set({
         isMobile: false,
         isTablet: false,
