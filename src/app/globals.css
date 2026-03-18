@@ -36,7 +36,7 @@
 
   /* AISE+ design tokens */
   --color-canvas-primary: var(--bg-primary);
-  --color-canvas-secondary: var(--bg-secondary);
+  --color-canvas-secondary: var(--bg-secondary-foreground);
   --color-canvas-surface: var(--bg-surface);
   --color-canvas-input: var(--bg-input);
   --color-line-primary: var(--border-primary);

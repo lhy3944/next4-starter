@@ -1,23 +1,23 @@
-'use client';
+"use client";
 
-import { AppsDropdown } from '@/components/overlay/AppsDropdown';
-import { LabsDialog, LabsTrigger } from '@/components/overlay/LabsDialog';
-import { ProfileDropdown } from '@/components/overlay/ProfileDropdown';
-import { SearchDialog } from '@/components/overlay/SearchDialog';
-import { SettingsDialog } from '@/components/overlay/SettingsDialog';
-import { ThemeToggle } from '@/components/shared/ThemeToggle';
+import { AppsDropdown } from "@/components/overlay/AppsDropdown";
+import { LabsDialog, LabsTrigger } from "@/components/overlay/LabsDialog";
+import { ProfileDropdown } from "@/components/overlay/ProfileDropdown";
+import { SearchDialog } from "@/components/overlay/SearchDialog";
+import { SettingsDialog } from "@/components/overlay/SettingsDialog";
+import { ThemeToggle } from "@/components/shared/ThemeToggle";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from '@/components/ui/tooltip';
-import { usePanelStore } from '@/stores/panel-store';
-import { Bell, Fullscreen, Search } from 'lucide-react';
-import { useTheme } from 'next-themes';
-import { useState } from 'react';
-import { Button } from '../ui/button';
-import { Separator } from '../ui/separator';
-import { NotificationPanel } from './NotificationPanel';
+} from "@/components/ui/tooltip";
+import { usePanelStore } from "@/stores/panel-store";
+import { Bell, Fullscreen, Search } from "lucide-react";
+import { useTheme } from "next-themes";
+import { useState } from "react";
+import { Button } from "../ui/button";
+import { Separator } from "../ui/separator";
+import { NotificationPanel } from "./NotificationPanel";
 
 interface HeaderActionsProps {
   showLayoutToggle?: boolean;
@@ -38,16 +38,16 @@ export function HeaderActions({
 
   return (
     <>
-      <div className='flex items-center gap-1'>
+      <div className="flex items-center gap-1">
         {/* 검색 */}
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
               onClick={() => setSearchOpen(true)}
-              variant={'ghost'}
-              className='text-icon-default hover:text-icon-active transition-colors'
+              variant={"ghost"}
+              className="text-icon-default hover:text-icon-active transition-colors"
             >
-              <Search className='h-5 w-5' />
+              <Search className="h-5 w-5" />
             </Button>
           </TooltipTrigger>
           <TooltipContent>검색 (Ctrl+K)</TooltipContent>
@@ -58,60 +58,62 @@ export function HeaderActions({
           <TooltipTrigger asChild>
             <Button
               onClick={toggleNotification}
-              variant={'ghost'}
-              className={`transition-colors ${notificationOpen ? 'text-icon-active' : 'text-icon-default hover:text-icon-active'}`}
+              variant={"ghost"}
+              className={`transition-colors ${notificationOpen ? "text-icon-active" : "text-icon-default hover:text-icon-active"}`}
             >
-              <Bell className='h-5 w-5' />
-              <span className='absolute bg-red-500 ml-3 mb-5 w-[7px] h-[8px] rounded-full px-1 leading-none pointer-events-none'></span>
+              <Bell className="h-5 w-5" />
+              <span className="absolute bg-red-500 ml-3 mb-5 w-[7px] h-[8px] rounded-full px-1 leading-none pointer-events-none"></span>
             </Button>
           </TooltipTrigger>
           <TooltipContent>알림</TooltipContent>
         </Tooltip>
 
         {/* Apps - Hide on mobile */}
-        <div className='hidden md:block'>
+        <div className="hidden lg:block">
           <AppsDropdown />
         </div>
 
         {/* Labs - Hide on mobile */}
-        <div className='hidden md:block'>
+        <div className="hidden lg:block">
           <LabsTrigger onClick={() => setLabsOpen(true)} />
         </div>
 
         <Separator
-          orientation='vertical'
-          className='hidden md:block data-[orientation=vertical]:h-6 mx-2'
+          orientation="vertical"
+          className="hidden md:block data-[orientation=vertical]:h-6 mx-2"
         />
 
         {/* 레이아웃 토글 - Hide on mobile */}
-        {showLayoutToggle && (
-          <div className='hidden md:block'>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  onClick={toggleFullWidth}
-                  variant={'ghost'}
-                  className={`transition-colors ${fullWidthMode ? 'text-icon-active' : 'text-icon-default hover:text-icon-active'}`}
-                >
-                  <Fullscreen
-                    className='h-5 w-5'
-                    fill={fullWidthMode ? 'currentColor' : 'transparent'}
-                  />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>전체 레이아웃</TooltipContent>
-            </Tooltip>
-          </div>
-        )}
+        <div className="hidden lg:flex">
+          {showLayoutToggle && (
+            <div className="hidden md:block">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    onClick={toggleFullWidth}
+                    variant={"ghost"}
+                    className={`transition-colors ${fullWidthMode ? "text-icon-active" : "text-icon-default hover:text-icon-active"}`}
+                  >
+                    <Fullscreen
+                      className="h-5 w-5"
+                      fill={fullWidthMode ? "currentColor" : "transparent"}
+                    />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>전체 레이아웃</TooltipContent>
+              </Tooltip>
+            </div>
+          )}
 
-        {/* 테마토글 */}
-        <ThemeToggle
-          className='hidden md:flex items-center md:mr-2'
-          checked={resolvedTheme === 'dark'}
-          onCheckedChange={() =>
-            setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
-          }
-        />
+          {/* 테마토글 */}
+          <ThemeToggle
+            className="hidden md:flex items-center md:mr-2"
+            checked={resolvedTheme === "dark"}
+            onCheckedChange={() =>
+              setTheme(resolvedTheme === "dark" ? "light" : "dark")
+            }
+          />
+        </div>
 
         {/* 프로필 */}
         <ProfileDropdown onSettingsOpen={() => setSettingsOpen(true)} />
