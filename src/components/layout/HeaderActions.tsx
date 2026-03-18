@@ -84,7 +84,7 @@ export function HeaderActions({
         />
 
         {/* 레이아웃 토글 - Hide on mobile */}
-        <div className="hidden lg:flex">
+        <div className="items-center hidden lg:flex">
           {showLayoutToggle && (
             <div className="hidden md:block">
               <Tooltip>
@@ -107,7 +107,7 @@ export function HeaderActions({
 
           {/* 테마토글 */}
           <ThemeToggle
-            className="hidden md:flex items-center md:mr-2"
+            className="hidden md:flex md:mx-2"
             checked={resolvedTheme === "dark"}
             onCheckedChange={() =>
               setTheme(resolvedTheme === "dark" ? "light" : "dark")
