@@ -53,6 +53,9 @@ jobs:
     needs: build-and-push # 빌드 완료 후 실행
 
     steps:
+      - name: 코드 체크아웃
+        uses: actions/checkout@v4
+
       - name: docker-compose.yml 배포
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -62,6 +65,7 @@ jobs:
           port: ${{ secrets.VPS_PORT }}
           source: "docker-compose.yml"
           target: "/var/www/next4-starter"
+          overwrite: true
 
       - name: VPS에 SSH 접속 후 배포
         uses: appleboy/ssh-action@v1.0.3
