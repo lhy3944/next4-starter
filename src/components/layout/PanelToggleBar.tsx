@@ -1,47 +1,56 @@
 "use client";
 
-import { PanelRightOpen, Columns2, PanelRightClose } from "lucide-react";
-import { usePanelStore } from "@/stores/panel-store";
 import { cn } from "@/lib/utils";
+import { usePanelStore } from "@/stores/panel-store";
+import { Columns2, PanelRightClose, PanelRightOpen } from "lucide-react";
+import { Button } from "../ui/button";
 
 export function PanelToggleBar() {
-  const rightPanelOpen = usePanelStore((s) => s.rightPanelOpen);
-  const rightPanelWidth = usePanelStore((s) => s.rightPanelWidth);
+  const layoutMode = usePanelStore((s) => s.layoutMode);
   const setRightPanelPreset = usePanelStore((s) => s.setRightPanelPreset);
 
-  const isWide = rightPanelOpen && rightPanelWidth >= 60;
-  const isSplit = rightPanelOpen && rightPanelWidth >= 40 && rightPanelWidth < 60;
-  const isClosed = !rightPanelOpen;
+  const isWide = layoutMode === "wide";
+  const isSplit = layoutMode === "split";
+  const isClosed = layoutMode === "closed";
 
   return (
-    <div className="flex items-center gap-1 rounded-lg bg-canvas-surface p-1">
-      <button
+    <div className="hidden lg:flex items-center">
+      <Button
+        variant={"ghost"}
         onClick={() => setRightPanelPreset("wide")}
         className={cn(
-          "flex h-7 w-7 items-center justify-center rounded-md transition-colors",
-          isWide ? "bg-line-primary text-icon-active" : "text-fg-secondary hover:text-icon-active"
+          "w-8 h-8",
+          isWide
+            ? "text-icon-active"
+            : "text-fg-secondary hover:text-icon-active",
         )}
       >
         <PanelRightOpen className="h-4 w-4" />
-      </button>
-      <button
+      </Button>
+      <Button
+        variant={"ghost"}
         onClick={() => setRightPanelPreset("split")}
         className={cn(
-          "flex h-7 w-7 items-center justify-center rounded-md transition-colors",
-          isSplit ? "bg-line-primary text-icon-active" : "text-fg-secondary hover:text-icon-active"
+          "w-8 h-8",
+          isSplit
+            ? "text-icon-active"
+            : "text-fg-secondary hover:text-icon-active",
         )}
       >
         <Columns2 className="h-4 w-4" />
-      </button>
-      <button
+      </Button>
+      <Button
+        variant={"ghost"}
         onClick={() => setRightPanelPreset("closed")}
         className={cn(
-          "flex h-7 w-7 items-center justify-center rounded-md transition-colors",
-          isClosed ? "bg-line-primary text-icon-active" : "text-fg-secondary hover:text-icon-active"
+          "w-8 h-8",
+          isClosed
+            ? "text-icon-active"
+            : "text-fg-secondary hover:text-icon-active",
         )}
       >
         <PanelRightClose className="h-4 w-4" />
-      </button>
+      </Button>
     </div>
   );
 }

@@ -1,16 +1,17 @@
 "use client";
 
-import { useRef } from "react";
-import { usePanelStore } from "@/stores/panel-store";
-import { useResponsivePanel } from "@/hooks/useMediaQuery";
-import { useResize } from "@/hooks/useResize";
 import { Header } from "@/components/layout/Header";
 import { LeftSidebar } from "@/components/layout/LeftSidebar";
 import { MobileBottomDrawer } from "@/components/layout/MobileBottomDrawer";
-import { RightPanel } from "@/components/layout/RightPanel";
-import { ResizeHandle } from "@/components/layout/ResizeHandle";
 import { NotificationPanel } from "@/components/layout/NotificationPanel";
+import { PanelToggleBar } from "@/components/layout/PanelToggleBar";
+import { ResizeHandle } from "@/components/layout/ResizeHandle";
+import { RightPanel } from "@/components/layout/RightPanel";
+import { useResponsivePanel } from "@/hooks/useMediaQuery";
+import { useResize } from "@/hooks/useResize";
 import { cn } from "@/lib/utils";
+import { usePanelStore } from "@/stores/panel-store";
+import { useRef } from "react";
 
 export default function ChatLayout({
   children,
@@ -18,7 +19,8 @@ export default function ChatLayout({
   children: React.ReactNode;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { onPointerDown, isResizing } = useResize(containerRef);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const { onPointerDown, isResizing } = useResize(containerRef, panelRef);
 
   const fullWidthMode = usePanelStore((s) => s.fullWidthMode);
   const leftSidebarOpen = usePanelStore((s) => s.leftSidebarOpen);
@@ -65,20 +67,11 @@ export default function ChatLayout({
 
         {children}
 
-        {/* ResizeHandle */}
+        {/* RightPanel + ResizeHandle (lg 이상에서만 표시) */}
         <div
+          ref={panelRef}
           className={cn(
-            "shrink-0 transition-opacity duration-300",
-            showRightPanel ? "opacity-100" : "opacity-0 pointer-events-none",
-          )}
-        >
-          <ResizeHandle onPointerDown={onPointerDown} />
-        </div>
-
-        {/* RightPanel */}
-        <div
-          className={cn(
-            "h-full shrink-0 overflow-hidden border-l border-line-primary",
+            "relative h-full shrink-0 overflow-visible hidden lg:block",
             isResizing
               ? "transition-none"
               : "transition-[width] duration-300 ease-in-out",
@@ -86,7 +79,10 @@ export default function ChatLayout({
           style={{ width: showRightPanel ? `${rightPanelWidth}%` : "0%" }}
           aria-hidden={!showRightPanel}
         >
-          <RightPanel />
+          <ResizeHandle isOpen={showRightPanel} onPointerDown={onPointerDown} />
+          <div className="h-full overflow-hidden">
+            <RightPanel />
+          </div>
         </div>
 
         {/* NotificationPanel — Drawer overlay */}
