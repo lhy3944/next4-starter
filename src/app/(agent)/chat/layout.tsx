@@ -67,11 +67,16 @@ export default function ChatLayout({
 
         {children}
 
-        {/* RightPanel + ResizeHandle (lg 이상에서만 표시) */}
+        {/* ResizeHandle — 패널 바깥에 독립 배치 (잘림 방지) */}
+        <div className="relative shrink-0 w-0 h-full hidden lg:block">
+          <ResizeHandle isOpen={showRightPanel} onPointerDown={onPointerDown} />
+        </div>
+
+        {/* RightPanel (lg 이상에서만 표시) */}
         <div
           ref={panelRef}
           className={cn(
-            "relative h-full shrink-0 overflow-visible hidden lg:block",
+            "h-full shrink-0 overflow-hidden hidden lg:block",
             isResizing
               ? "transition-none"
               : "transition-[width] duration-300 ease-in-out",
@@ -79,10 +84,7 @@ export default function ChatLayout({
           style={{ width: showRightPanel ? `${rightPanelWidth}%` : "0%" }}
           aria-hidden={!showRightPanel}
         >
-          <ResizeHandle isOpen={showRightPanel} onPointerDown={onPointerDown} />
-          <div className="h-full overflow-hidden">
-            <RightPanel />
-          </div>
+          <RightPanel />
         </div>
 
         {/* NotificationPanel — Drawer overlay */}
