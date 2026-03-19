@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import {
   Drawer,
   DrawerContent,
+  DrawerDescription,
   DrawerHeader,
   DrawerTitle,
 } from "@/components/ui/drawer";
@@ -24,7 +25,7 @@ const bottomIcons = [
   { icon: CircleHelp, label: "도움말" },
 ];
 
-export function MobileSidebarDrawer() {
+export function MobileBottomDrawer() {
   const createThread = useChatStore((s) => s.createThread);
   const [open, setOpen] = useState(false);
 
@@ -59,6 +60,7 @@ export function MobileSidebarDrawer() {
             <DrawerTitle className="text-base font-semibold text-fg-primary">
               대화 목록
             </DrawerTitle>
+            <DrawerDescription />
             <Button
               onClick={handleCreateThread}
               variant="ghost"
@@ -70,7 +72,7 @@ export function MobileSidebarDrawer() {
             </Button>
           </DrawerHeader>
 
-          <div className="flex-1 overflow-hidden px-2 py-3">
+          <div className="flex max-h-[60vh] overflow-hidden px-2 py-3">
             <ThreadList />
           </div>
 
