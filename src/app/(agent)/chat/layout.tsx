@@ -69,7 +69,7 @@ export default function ChatLayout({
 
         {/* ResizeHandle — 패널 바깥에 독립 배치 (잘림 방지) */}
         <div className="relative shrink-0 w-0 h-full hidden lg:block">
-          <ResizeHandle isOpen={showRightPanel} onPointerDown={onPointerDown} />
+          <ResizeHandle isOpen={showRightPanel} isResizing={isResizing} onPointerDown={onPointerDown} />
         </div>
 
         {/* RightPanel (lg 이상에서만 표시) */}

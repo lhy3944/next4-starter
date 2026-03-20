@@ -1,7 +1,12 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-export type LayoutMode = "wide" | "split" | "closed" | "custom";
+export enum LayoutMode {
+  WIDE = "wide",
+  SPLIT = "split",
+  CLOSED = "closed",
+  CUSTOM = "custom",
+}
 
 interface PanelState {
   leftSidebarOpen: boolean;
@@ -17,24 +22,21 @@ interface PanelState {
   toggleLeftSidebar: () => void;
   toggleRightPanel: () => void;
   setRightPanelWidth: (pct: number) => void;
-  setRightPanelPreset: (preset: "wide" | "split" | "closed") => void;
+  setRightPanelPreset: (
+    preset: LayoutMode.WIDE | LayoutMode.SPLIT | LayoutMode.CLOSED,
+  ) => void;
   toggleNotification: () => void;
   toggleFullWidth: () => void;
   setViewport: (width: number) => void;
-  ensureMinChatWidth: (containerWidth: number) => void;
 }
-
-const MIN_CHAT_WIDTH = 550;
-const SIDEBAR_WIDTH = 220;
-const ICON_RAIL_WIDTH = 48;
 
 export const usePanelStore = create<PanelState>()(
   persist(
     (set, get) => ({
       leftSidebarOpen: false,
       rightPanelOpen: false,
-      rightPanelWidth: 50,
-      layoutMode: "closed" as LayoutMode,
+      rightPanelWidth: 0,
+      layoutMode: LayoutMode.CLOSED,
       notificationOpen: false,
       fullWidthMode: false,
       isMobile: false,
@@ -59,24 +61,24 @@ export const usePanelStore = create<PanelState>()(
 
       setRightPanelPreset: (preset) => {
         switch (preset) {
-          case "wide":
+          case LayoutMode.WIDE:
             set({
               rightPanelOpen: true,
               rightPanelWidth: 70,
-              layoutMode: "wide",
+              layoutMode: LayoutMode.WIDE,
               notificationOpen: false,
             });
             break;
-          case "split":
+          case LayoutMode.SPLIT:
             set({
               rightPanelOpen: true,
               rightPanelWidth: 50,
-              layoutMode: "split",
+              layoutMode: LayoutMode.SPLIT,
               notificationOpen: false,
             });
             break;
-          case "closed":
-            set({ rightPanelOpen: false, layoutMode: "closed" });
+          case LayoutMode.CLOSED:
+            set({ rightPanelOpen: false, layoutMode: LayoutMode.CLOSED });
             break;
         }
       },
@@ -128,29 +130,6 @@ export const usePanelStore = create<PanelState>()(
             leftSidebarOpen: state.previousLeftSidebar,
             previousLeftSidebar: false,
           });
-        }
-      },
-
-      ensureMinChatWidth: (containerWidth) => {
-        const state = get();
-        const iconRail = state.fullWidthMode ? 0 : ICON_RAIL_WIDTH;
-        const sidebar = state.leftSidebarOpen ? SIDEBAR_WIDTH : 0;
-        const rightPx = state.rightPanelOpen
-          ? (containerWidth * state.rightPanelWidth) / 100
-          : 0;
-        const notifPx = state.notificationOpen ? 320 : 0;
-
-        const chatWidth =
-          containerWidth - iconRail - sidebar - rightPx - notifPx;
-
-        if (chatWidth < MIN_CHAT_WIDTH) {
-          if (state.rightPanelOpen) {
-            set({ rightPanelOpen: false });
-          } else if (state.notificationOpen) {
-            set({ notificationOpen: false });
-          } else if (state.leftSidebarOpen) {
-            set({ leftSidebarOpen: false });
-          }
         }
       },
     }),

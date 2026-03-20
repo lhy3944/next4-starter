@@ -1,16 +1,18 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { ChevronLeft, ChevronRight, GripVertical } from "lucide-react";
+import { GripVertical } from "lucide-react";
 import { Button } from "../ui/button";
 
 interface ResizeHandleProps {
   isOpen?: boolean;
+  isResizing?: boolean;
   onPointerDown: (e: React.MouseEvent | React.TouchEvent) => void;
 }
 
 export function ResizeHandle({
   isOpen = false,
+  isResizing = false,
   onPointerDown,
 }: ResizeHandleProps) {
   return (
@@ -33,9 +35,9 @@ export function ResizeHandle({
         )}
       />
 
-      {/* 플로팅 토글 버튼 — 닫힌 상태에서만 표시 */}
+      {/* 플로팅 토글 버튼 — Closed 상태 */}
       {!isOpen && (
-        <div className="absolute top-1/2 -translate-y-1/2 right-2">
+        <div className={cn("absolute top-1/2 -translate-y-1/2 transition-[right] duration-150", isResizing ? "right-0" : "right-2")}>
           <Button
             variant={"ghost"}
             size="icon-sm"

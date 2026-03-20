@@ -27,7 +27,7 @@ export function MobileRightDrawer() {
         <PanelRightOpen className="h-5 w-5" />
       </Button>
 
-      <DrawerContent className="w-[85vw] sm:w-[380px] p-0 flex flex-col border-l border-line-primary bg-canvas-primary h-full">
+      <DrawerContent className="top-15! w-[85vw] sm:w-[380px] p-0 flex flex-col border-l border-line-primary bg-canvas-primary h-auto bottom-0!" overlayClassName="top-15!">
         <DrawerHeader className="flex flex-row items-center justify-between border-b border-line-primary p-3">
           <DrawerTitle className="text-base font-semibold text-fg-primary"></DrawerTitle>
           <DrawerDescription />

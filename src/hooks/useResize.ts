@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { type LayoutMode, usePanelStore } from "@/stores/panel-store";
+import { LayoutMode, usePanelStore } from "@/stores/panel-store";
 
 const CLOSE_THRESHOLD = 5; // % 미만이면 닫힘
 const SNAP_ZONE = 1.5; // 스냅 허용 범위 (±%)
@@ -42,16 +42,16 @@ function resolveSnap(
   splitPct: number,
 ): { displayPct: number; mode: LayoutMode } {
   if (pct < CLOSE_THRESHOLD) {
-    return { displayPct: 0, mode: "closed" };
+    return { displayPct: 0, mode: LayoutMode.CLOSED };
   }
   const clamped = Math.min(pct, maxPct);
   if (clamped >= maxPct - SNAP_ZONE && maxPct > CLOSE_THRESHOLD) {
-    return { displayPct: maxPct, mode: "wide" };
+    return { displayPct: maxPct, mode: LayoutMode.WIDE };
   }
   if (Math.abs(clamped - splitPct) < SNAP_ZONE && splitPct <= maxPct) {
-    return { displayPct: splitPct, mode: "split" };
+    return { displayPct: splitPct, mode: LayoutMode.SPLIT };
   }
-  return { displayPct: clamped, mode: "custom" };
+  return { displayPct: clamped, mode: LayoutMode.CUSTOM };
 }
 
 /**
@@ -98,7 +98,7 @@ function enforceMinChat(
   }
 
   // 패널 닫기
-  usePanelStore.setState({ rightPanelOpen: false, layoutMode: "closed" });
+  usePanelStore.setState({ rightPanelOpen: false, layoutMode: LayoutMode.CLOSED });
   panelEl.style.width = "0%";
 }
 
@@ -112,7 +112,7 @@ export function useResize(
   const isDragging = useRef(false);
   const dragMoved = useRef(false);
   const dragStartX = useRef(0);
-  const prevSnapMode = useRef<LayoutMode>("custom");
+  const prevSnapMode = useRef<LayoutMode>(LayoutMode.CUSTOM);
 
   // stale closure 방지
   const storeRef = useRef(usePanelStore.getState());
@@ -167,9 +167,9 @@ export function useResize(
 
       // 스냅존 진입/이탈 전환
       const prevMode = prevSnapMode.current;
-      if (prevMode === "custom" && mode !== "custom") {
+      if (prevMode === LayoutMode.CUSTOM && mode !== LayoutMode.CUSTOM) {
         panelRef.current.style.transition = "width 120ms ease-out";
-      } else if (prevMode !== "custom" && mode === "custom") {
+      } else if (prevMode !== LayoutMode.CUSTOM && mode === LayoutMode.CUSTOM) {
         panelRef.current.style.transition = "none";
       }
       prevSnapMode.current = mode;
@@ -208,7 +208,7 @@ export function useResize(
             layoutMode: mode,
           });
         } else {
-          usePanelStore.setState({ rightPanelOpen: false, layoutMode: "closed" });
+          usePanelStore.setState({ rightPanelOpen: false, layoutMode: LayoutMode.CLOSED });
         }
       } else {
         // 드래그 완료 → store commit
@@ -221,7 +221,7 @@ export function useResize(
         const splitPct = getSplitPct(cw, sidebarPx);
 
         if (isNaN(finalPct) || finalPct < CLOSE_THRESHOLD) {
-          usePanelStore.setState({ rightPanelOpen: false, layoutMode: "closed" });
+          usePanelStore.setState({ rightPanelOpen: false, layoutMode: LayoutMode.CLOSED });
         } else {
           const { displayPct, mode } = resolveSnap(finalPct, maxPct, splitPct);
           usePanelStore.setState({
@@ -253,7 +253,7 @@ export function useResize(
       e.preventDefault();
       isDragging.current = true;
       dragMoved.current = false;
-      prevSnapMode.current = "custom";
+      prevSnapMode.current = LayoutMode.CUSTOM;
       dragStartX.current =
         "touches" in e ? (e.touches[0]?.clientX ?? 0) : e.clientX;
       setIsResizing(true);
