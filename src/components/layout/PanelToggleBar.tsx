@@ -7,9 +7,9 @@ import { Button } from "../ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 const MODES = [
-  { mode: LayoutMode.WIDE, icon: PanelRightOpen, label: "Max Panel" },
-  { mode: LayoutMode.SPLIT, icon: Columns2, label: "Split Panel" },
-  { mode: LayoutMode.CLOSED, icon: PanelRightClose, label: "Close Panel" },
+  { mode: LayoutMode.WIDE, icon: PanelRightOpen, label: "최대" },
+  { mode: LayoutMode.SPLIT, icon: Columns2, label: "분할" },
+  { mode: LayoutMode.CLOSED, icon: PanelRightClose, label: "닫기" },
 ] as const;
 
 export function PanelToggleBar() {

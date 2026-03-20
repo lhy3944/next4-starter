@@ -3,6 +3,7 @@
 import { Header } from "@/components/layout/Header";
 import { LeftSidebar } from "@/components/layout/LeftSidebar";
 import { MobileBottomDrawer } from "@/components/layout/MobileBottomDrawer";
+import { MobileRightDrawer } from "@/components/layout/MobileRightDrawer";
 import { NotificationPanel } from "@/components/layout/NotificationPanel";
 import { PanelToggleBar } from "@/components/layout/PanelToggleBar";
 import { ResizeHandle } from "@/components/layout/ResizeHandle";
@@ -22,7 +23,6 @@ export default function ChatLayout({
   const panelRef = useRef<HTMLDivElement>(null);
   const { onPointerDown, isResizing } = useResize(containerRef, panelRef);
 
-  const fullWidthMode = usePanelStore((s) => s.fullWidthMode);
   const leftSidebarOpen = usePanelStore((s) => s.leftSidebarOpen);
   const rightPanelOpen = usePanelStore((s) => s.rightPanelOpen);
   const rightPanelWidth = usePanelStore((s) => s.rightPanelWidth);
@@ -30,7 +30,7 @@ export default function ChatLayout({
 
   useResponsivePanel();
 
-  const showLeftPanel = !fullWidthMode && !isMobile;
+  const showLeftPanel = !isMobile;
   const showSidebar = leftSidebarOpen && !isMobile;
   const showRightPanel = rightPanelOpen;
 
@@ -65,11 +65,26 @@ export default function ChatLayout({
           )}
         />
 
-        {children}
+        {/* Content area */}
+        <div className="relative flex min-w-0 flex-1 flex-col overflow-y-auto">
+          {/* 우상단 고정 — absolute로 흐름에서 제외 */}
+          <div className="absolute top-2 right-2 z-10 sm:right-4">
+            <div className="flex items-center gap-1">
+              <PanelToggleBar />
+              <MobileRightDrawer />
+            </div>
+          </div>
+
+          {children}
+        </div>
 
         {/* ResizeHandle — 패널 바깥에 독립 배치 (잘림 방지) */}
         <div className="relative shrink-0 w-0 h-full hidden lg:block">
-          <ResizeHandle isOpen={showRightPanel} isResizing={isResizing} onPointerDown={onPointerDown} />
+          <ResizeHandle
+            isOpen={showRightPanel}
+            isResizing={isResizing}
+            onPointerDown={onPointerDown}
+          />
         </div>
 
         {/* RightPanel (lg 이상에서만 표시) */}
