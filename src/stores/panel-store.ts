@@ -48,10 +48,7 @@ export const usePanelStore = create<PanelState>()(
       },
 
       toggleRightPanel: () => {
-        set((s) => ({
-          rightPanelOpen: !s.rightPanelOpen,
-          notificationOpen: !s.rightPanelOpen ? false : s.notificationOpen,
-        }));
+        set((s) => ({ rightPanelOpen: !s.rightPanelOpen }));
       },
 
       setRightPanelWidth: (pct) => {
@@ -66,7 +63,6 @@ export const usePanelStore = create<PanelState>()(
               rightPanelOpen: true,
               rightPanelWidth: 70,
               layoutMode: LayoutMode.WIDE,
-              notificationOpen: false,
             });
             break;
           case LayoutMode.SPLIT:
@@ -74,7 +70,6 @@ export const usePanelStore = create<PanelState>()(
               rightPanelOpen: true,
               rightPanelWidth: 50,
               layoutMode: LayoutMode.SPLIT,
-              notificationOpen: false,
             });
             break;
           case LayoutMode.CLOSED:
@@ -84,10 +79,7 @@ export const usePanelStore = create<PanelState>()(
       },
 
       toggleNotification: () => {
-        set((s) => ({
-          notificationOpen: !s.notificationOpen,
-          rightPanelOpen: !s.notificationOpen ? false : s.rightPanelOpen,
-        }));
+        set((s) => ({ notificationOpen: !s.notificationOpen }));
       },
 
       toggleFullWidth: () => {

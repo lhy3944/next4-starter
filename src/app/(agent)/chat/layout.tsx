@@ -21,7 +21,8 @@ export default function ChatLayout({
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
-  const { onPointerDown, isResizing } = useResize(containerRef, panelRef);
+  const sidebarRef = useRef<HTMLDivElement>(null);
+  const { onPointerDown, isResizing } = useResize(containerRef, panelRef, sidebarRef);
 
   const leftSidebarOpen = usePanelStore((s) => s.leftSidebarOpen);
   const rightPanelOpen = usePanelStore((s) => s.rightPanelOpen);
@@ -48,6 +49,7 @@ export default function ChatLayout({
 
         {/* LeftSidebar */}
         <div
+          ref={sidebarRef}
           className={cn(
             "shrink-0 overflow-hidden transition-[width] duration-300 ease-in-out",
             !showLeftPanel ? "w-0" : showSidebar ? "w-[220px]" : "w-15",
