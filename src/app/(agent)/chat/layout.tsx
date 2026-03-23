@@ -52,6 +52,7 @@ export default function ChatLayout({
           ref={sidebarRef}
           className={cn(
             "shrink-0 overflow-hidden transition-[width] duration-300 ease-in-out",
+            "max-md:w-0!",
             !showLeftPanel ? "w-0" : showSidebar ? "w-[220px]" : "w-15",
           )}
           aria-hidden={!showLeftPanel}

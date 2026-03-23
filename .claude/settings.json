@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Read(//c/Program Files/Git/bin/**)"
+      "Read(//c/Program Files/Git/bin/**)",
+      "WebFetch(domain:ai-sdk.dev)"
     ]
   }
 }
