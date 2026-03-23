@@ -5,6 +5,8 @@ import {
   Message,
   MessageContent,
   MessageResponse,
+  MessageActions,
+  MessageAction,
 } from "@/components/ai-elements/message";
 import {
   Reasoning,
@@ -18,6 +20,10 @@ import {
   SourcesTrigger,
   Source,
 } from "@/components/ai-elements/sources";
+import { useViewerStore } from "@/stores/viewer-store";
+import { LayoutMode, usePanelStore } from "@/stores/panel-store";
+import { ExternalLinkIcon, CopyIcon } from "lucide-react";
+import { useCallback } from "react";
 
 interface MessageBubbleProps {
   message: UIMessage;
@@ -25,6 +31,21 @@ interface MessageBubbleProps {
 
 export function MessageBubble({ message }: MessageBubbleProps) {
   const sourceParts = message.parts.filter((p) => p.type === "source-url");
+  const openTab = useViewerStore((s) => s.openTab);
+  const rightPanelOpen = usePanelStore((s) => s.rightPanelOpen);
+  const setRightPanelPreset = usePanelStore((s) => s.setRightPanelPreset);
+
+  const openInViewer = useCallback(
+    (title: string, content: string, type: "markdown" | "code" | "text", meta?: Record<string, string>) => {
+      openTab({ type, title, content, meta });
+      if (!rightPanelOpen) {
+        setRightPanelPreset(LayoutMode.SPLIT);
+      }
+    },
+    [openTab, rightPanelOpen, setRightPanelPreset],
+  );
+
+  const isAssistant = message.role === "assistant";
 
   return (
     <Message from={message.role}>
@@ -34,7 +55,33 @@ export function MessageBubble({ message }: MessageBubbleProps) {
 
           switch (part.type) {
             case "text":
-              return <MessageResponse key={key}>{part.text}</MessageResponse>;
+              return (
+                <div key={key}>
+                  <MessageResponse>{part.text}</MessageResponse>
+                  {isAssistant && (
+                    <MessageActions className="mt-2 opacity-0 transition-opacity group-hover:opacity-100">
+                      <MessageAction
+                        tooltip="뷰어에서 열기"
+                        onClick={() =>
+                          openInViewer(
+                            `메시지 #${message.id.slice(-3)}`,
+                            part.text,
+                            "markdown",
+                          )
+                        }
+                      >
+                        <ExternalLinkIcon className="size-3.5" />
+                      </MessageAction>
+                      <MessageAction
+                        tooltip="복사"
+                        onClick={() => navigator.clipboard.writeText(part.text)}
+                      >
+                        <CopyIcon className="size-3.5" />
+                      </MessageAction>
+                    </MessageActions>
+                  )}
+                </div>
+              );
 
             case "reasoning":
               return (
@@ -60,11 +107,28 @@ export function MessageBubble({ message }: MessageBubbleProps) {
                       />
                     </ToolContent>
                   )}
+                  {"output" in part && part.output != null && (
+                    <div className="border-t border-border px-3 py-2">
+                      <button
+                        onClick={() =>
+                          openInViewer(
+                            part.toolName,
+                            JSON.stringify(part.output, null, 2),
+                            "code",
+                            { language: "json" },
+                          )
+                        }
+                        className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        <ExternalLinkIcon className="size-3" />
+                        뷰어에서 열기
+                      </button>
+                    </div>
+                  )}
                 </Tool>
               );
 
             case "source-url":
-              // source-url은 아래 Sources 블록에서 묶어서 렌더링
               return null;
 
             default:
@@ -72,7 +136,6 @@ export function MessageBubble({ message }: MessageBubbleProps) {
           }
         })}
 
-        {/* 소스 묶음 렌더링 */}
         {sourceParts.length > 0 && (
           <Sources>
             <SourcesTrigger count={sourceParts.length} />

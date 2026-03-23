@@ -2,7 +2,17 @@
   "permissions": {
     "allow": [
       "Read(//c/Program Files/Git/bin/**)",
-      "WebFetch(domain:ai-sdk.dev)"
+      "WebFetch(domain:ai-sdk.dev)",
+      "Bash(npx ai-elements@latest add conversation message prompt-input reasoning tool code-block sources suggestion)",
+      "Bash(npx ai-elements@latest add conversation message prompt-input reasoning tool code-block sources suggestion --overwrite)",
+      "Bash(yes)",
+      "Bash(npm ls:*)",
+      "Bash(node -e:*)",
+      "Bash(npm run:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git merge:*)",
+      "Bash(git stash:*)"
     ]
   }
 }
