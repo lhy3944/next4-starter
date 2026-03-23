@@ -75,11 +75,36 @@ function enforceMinChat(
   const chatPx = getChatPx(containerWidth, sidebarPx, rightPanelWidth);
 
   if (chatPx >= MIN_CHAT_WIDTH) {
-    // 공간은 충분하지만, 스냅 모드 재분류 (사이드바 토글 시 maxPct 변동)
     const maxPct = getMaxPct(containerWidth, sidebarPx);
     const splitPct = getSplitPct(containerWidth, sidebarPx);
+    const { layoutMode } = usePanelStore.getState();
+
+    // Named mode → snap 위치 보정
+    //   resize: 브라우저 리사이즈 → 항상 보정 (snap 위치 자체가 변동)
+    //   store:  프리셋 하드코딩 값(50/70)일 때만 보정
+    const snapSplit = layoutMode === LayoutMode.SPLIT && splitPct <= maxPct
+      && (source === "resize" || rightPanelWidth === 50);
+    const snapWide = layoutMode === LayoutMode.WIDE
+      && (source === "resize" || rightPanelWidth === 70);
+
+    if (snapSplit) {
+      if (rightPanelWidth !== splitPct) {
+        usePanelStore.setState({ rightPanelWidth: splitPct });
+        panelEl.style.width = `${splitPct}%`;
+      }
+      return;
+    }
+    if (snapWide) {
+      if (rightPanelWidth !== maxPct) {
+        usePanelStore.setState({ rightPanelWidth: maxPct });
+        panelEl.style.width = `${maxPct}%`;
+      }
+      return;
+    }
+
+    // CUSTOM 또는 사이드바 토글 후 → 스냅 모드 재분류
     const { mode } = resolveSnap(rightPanelWidth, maxPct, splitPct);
-    if (usePanelStore.getState().layoutMode !== mode) {
+    if (layoutMode !== mode) {
       usePanelStore.setState({ layoutMode: mode });
     }
     return;
