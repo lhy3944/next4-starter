@@ -45,7 +45,7 @@ export default function RootLayout({
       <body className={`${fontVariables} antialiased`}>
         <NextTopLoader {...topLoaderOptions} />
         <StoreProvider>
-          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem storageKey="aise-theme">
             <TooltipProvider>{children}</TooltipProvider>
           </ThemeProvider>
         </StoreProvider>
