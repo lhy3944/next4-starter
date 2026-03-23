@@ -12,7 +12,12 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(git merge:*)",
-      "Bash(git stash:*)"
+      "Bash(git stash:*)",
+      "Bash(grep -oP className[=:][\"\"x27][^\"\"]*[\"\"x27] /home/workpsace/next4-starter/node_modules/streamdown/dist/index.js)",
+      "Bash(grep -oP sdm[_-]w+ /home/workpsace/next4-starter/node_modules/streamdown/dist/index.js)",
+      "Bash(ls /home/workpsace/next4-starter/node_modules/streamdown/dist/*.css)",
+      "Bash(grep -r import.*.css /home/workpsace/next4-starter/node_modules/streamdown/dist/index.js)",
+      "Bash(tr ';' '\\\\n')"
     ]
   }
 }

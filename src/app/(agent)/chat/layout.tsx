@@ -69,9 +69,9 @@ export default function ChatLayout({
         />
 
         {/* Content area */}
-        <div className="relative flex min-w-0 flex-1 flex-col overflow-y-auto">
-          {/* 우상단 고정 — absolute로 흐름에서 제외 */}
-          <div className="absolute top-2 right-2 z-10 sm:right-4">
+        <div className="relative flex min-w-0 flex-1 flex-col overflow-hidden">
+          {/* 패널 토글 — 콘텐츠 위 sticky 영역 */}
+          <div className="flex shrink-0 items-center justify-end px-2 py-1.5 sm:px-4">
             <div className="flex items-center gap-1">
               <PanelToggleBar />
               <MobileRightDrawer />
