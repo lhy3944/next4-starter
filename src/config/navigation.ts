@@ -1,4 +1,4 @@
-import { MessageSquareMore, Workflow, Box } from "lucide-react";
+import { Box, MessageSquareMore } from "lucide-react";
 
 export const headerTabsConfig = [
   { href: "/chat", label: "Agent", icon: MessageSquareMore },

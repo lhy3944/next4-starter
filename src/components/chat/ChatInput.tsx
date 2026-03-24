@@ -22,7 +22,11 @@ export function ChatInput() {
   return (
     <PromptInput onSubmit={handleSubmit}>
       <PromptInputBody>
-        <PromptInputTextarea autoFocus />
+        <PromptInputTextarea
+          autoFocus
+          value={inputValue}
+          onChange={(e) => setInputValue(e.currentTarget.value)}
+        />
       </PromptInputBody>
       <PromptInputFooter>
         <PromptInputTools>

@@ -1,14 +1,17 @@
 "use client";
 
 import { ChatInput } from "@/components/chat/ChatInput";
+import { PromptSuggestions } from "@/components/chat/PromptSuggestions";
 import { cn } from "@/lib/utils";
+import { useChatStore } from "@/stores/chat-store";
 import { usePanelStore } from "@/stores/panel-store";
 
 export function ChatArea() {
   const fullWidthMode = usePanelStore((s) => s.fullWidthMode);
+  const setInputValue = useChatStore((s) => s.setInputValue);
 
   return (
-    <div className="flex flex-1 flex-col justify-center px-4 py-2">
+    <div className="flex flex-1 flex-col justify-start px-4 pt-[12vh]">
       <div
         className={cn(
           "mx-auto w-full transition-[max-width] duration-300 ease-in-out",
@@ -19,6 +22,7 @@ export function ChatArea() {
           <h1 className="text-4xl font-bold text-fg-primary">AISE 3.0</h1>
         </div>
         <ChatInput />
+        <PromptSuggestions rows={1} onSelect={setInputValue} />
       </div>
     </div>
   );
