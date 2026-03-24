@@ -8,7 +8,7 @@ import {
   PromptInputSubmit,
   PromptInputTextarea,
   PromptInputTools,
-} from "@/components/ai-elements/prompt-input";
+} from "@/components/ui/ai-elements/prompt-input";
 import { useChatStore } from "@/stores/chat-store";
 import { GlobeIcon, MicIcon, PaperclipIcon } from "lucide-react";
 export function ChatInput() {

@@ -14,7 +14,7 @@ interface ChatState {
   setInputValue: (val: string) => void;
 }
 
-const mockThreads: Thread[] = Array.from({ length: 15 }, (_, i) => ({
+const mockThreads: Thread[] = Array.from({ length: 5 }, (_, i) => ({
   id: `thread-${i + 1}`,
   title: `스레드 히스토리 ${i + 1}`,
 }));

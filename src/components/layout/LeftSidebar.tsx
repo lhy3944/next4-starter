@@ -48,7 +48,7 @@ export function LeftSidebar() {
           }}
           className="h-full shrink-0 overflow-hidden"
         >
-          <div className="flex h-full w-[220px] flex-col gap-2 pl-3 py-4">
+          <div className="flex h-full w-[220px] flex-col gap-2 pl-3 py-1.5">
             <div className="flex items-center justify-between">
               <Button
                 onClick={createThread}

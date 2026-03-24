@@ -2,14 +2,14 @@
 
 import { cn } from "@/lib/utils";
 import { LayoutMode, usePanelStore } from "@/stores/panel-store";
-import { Columns2, PanelRightClose, PanelRightOpen } from "lucide-react";
+import { Columns2, PanelLeft, PanelRight } from "lucide-react";
 import { Button } from "../ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 const MODES = [
-  { mode: LayoutMode.WIDE, icon: PanelRightOpen, label: "최대" },
+  { mode: LayoutMode.WIDE, icon: PanelLeft, label: "최대" },
   { mode: LayoutMode.SPLIT, icon: Columns2, label: "분할" },
-  { mode: LayoutMode.CLOSED, icon: PanelRightClose, label: "닫기" },
+  { mode: LayoutMode.CLOSED, icon: PanelRight, label: "닫기" },
 ] as const;
 
 export function PanelToggleBar() {
@@ -24,15 +24,15 @@ export function PanelToggleBar() {
           <Tooltip key={mode}>
             <TooltipTrigger asChild>
               <Button
-                variant={isActive ? "secondary" : "ghost"}
+                variant="ghost"
                 className={cn(
-                  "w-8 h-8",
+                  "w-8 h-8 dark:text-neutral-400",
                   isActive &&
-                    "bg-neutral-700 text-white hover:bg-neutral-600/90 dark:bg-secondary dark:text-secondary-foreground dark:hover:bg-secondary/80",
+                    "bg-neutral-700 text-white hover:bg-neutral-600/90 dark:bg-white dark:text-black dark:hover:bg-neutral-200",
                 )}
                 onClick={() => setRightPanelPreset(mode)}
               >
-                <Icon className="h-4 w-4" />
+                <Icon className="size-4" />
               </Button>
             </TooltipTrigger>
             <TooltipContent>{label}</TooltipContent>
