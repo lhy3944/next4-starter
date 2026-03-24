@@ -35,7 +35,7 @@ export function MobileBottomDrawer() {
   };
 
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center gap-1 py-1.5">
       <Button
         onClick={createThread}
         variant="ghost"

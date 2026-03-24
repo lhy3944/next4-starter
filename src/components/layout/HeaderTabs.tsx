@@ -9,7 +9,7 @@ export function HeaderTabs() {
   const pathname = usePathname();
 
   return (
-    <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center space-x-1">
+    <div className="hidden md:flex items-center space-x-1">
       {headerTabsConfig.map((tab) => {
         const isActive = pathname.startsWith(tab.href);
         return (

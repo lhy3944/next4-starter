@@ -22,7 +22,11 @@ export default function ChatLayout({
   const containerRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const sidebarRef = useRef<HTMLDivElement>(null);
-  const { onPointerDown, isResizing } = useResize(containerRef, panelRef, sidebarRef);
+  const { onPointerDown, isResizing } = useResize(
+    containerRef,
+    panelRef,
+    sidebarRef,
+  );
 
   const leftSidebarOpen = usePanelStore((s) => s.leftSidebarOpen);
   const rightPanelOpen = usePanelStore((s) => s.rightPanelOpen);
@@ -69,9 +73,8 @@ export default function ChatLayout({
         />
 
         {/* Content area */}
-        <div className="relative flex min-w-0 flex-1 flex-col overflow-y-auto">
-          {/* 우상단 고정 — absolute로 흐름에서 제외 */}
-          <div className="absolute top-2 right-2 z-10 sm:right-4">
+        <div className="relative flex min-w-0 flex-1 flex-col overflow-hidden">
+          <div className="flex shrink-0 items-center justify-end px-2 py-1.5 sm:px-4">
             <div className="flex items-center gap-1">
               <PanelToggleBar />
               <MobileRightDrawer />
