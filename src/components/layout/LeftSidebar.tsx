@@ -1,6 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { ThreadList } from "@/components/chat/ThreadList";
+import { SettingsDialog } from "@/components/overlay/SettingsDialog";
 import { Button } from "@/components/ui/button";
 import {
   Tooltip,
@@ -23,14 +25,13 @@ export function LeftSidebar() {
   const createThread = useChatStore((s) => s.createThread);
   const leftSidebarOpen = usePanelStore((s) => s.leftSidebarOpen);
   const toggleLeftSidebar = usePanelStore((s) => s.toggleLeftSidebar);
+  const [settingsOpen, setSettingsOpen] = useState(false);
 
   const BOTTOM_ICONS = [
     {
       icon: SlidersHorizontal,
       label: "앱 설정",
-      onClick: () => {
-        // TODO 앱 설정 Dialog
-      },
+      onClick: () => setSettingsOpen(true),
     },
     {
       icon: Box,
@@ -49,6 +50,7 @@ export function LeftSidebar() {
   ];
 
   return (
+    <>
     <AnimatePresence mode="popLayout">
       {leftSidebarOpen ? (
         <motion.div
@@ -168,5 +170,8 @@ export function LeftSidebar() {
         </motion.div>
       )}
     </AnimatePresence>
+
+    <SettingsDialog open={settingsOpen} onOpenChange={setSettingsOpen} />
+    </>
   );
 }
