@@ -1,33 +1,45 @@
-"use client";
+'use client';
 
-import { ThreadList } from "@/components/chat/ThreadList";
-import { Button } from "@/components/ui/button";
+import { ThreadList } from '@/components/chat/ThreadList';
+import { Button } from '@/components/ui/button';
 import {
   Drawer,
   DrawerContent,
   DrawerDescription,
   DrawerHeader,
   DrawerTitle,
-} from "@/components/ui/drawer";
-import { useChatStore } from "@/stores/chat-store";
-import {
-  Calendar,
-  CircleHelp,
-  List,
-  Plus,
-  SlidersHorizontal,
-} from "lucide-react";
-import { useState } from "react";
-
-const bottomIcons = [
-  { icon: SlidersHorizontal, label: "설정" },
-  { icon: Calendar, label: "캘린더" },
-  { icon: CircleHelp, label: "도움말" },
-];
+} from '@/components/ui/drawer';
+import { useChatStore } from '@/stores/chat-store';
+import { Box, CircleHelp, List, Plus, SlidersHorizontal } from 'lucide-react';
+import { useState } from 'react';
+import { SettingsDialog } from '../overlay/SettingsDialog';
 
 export function MobileBottomDrawer() {
   const createThread = useChatStore((s) => s.createThread);
   const [open, setOpen] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
+
+  const BOTTOM_ICONS = [
+    {
+      icon: SlidersHorizontal,
+      label: '앱 설정',
+      onClick: () => setSettingsOpen(true),
+    },
+    {
+      icon: Box,
+      label: '프로젝트',
+      onClick: () => {
+        // TODO Simple 프로젝트 설정 Dialog
+      },
+    },
+    {
+      icon: CircleHelp,
+      label: '도움말',
+      onClick: () => {
+        // TODO 앱 도움말 Dialog
+      },
+    },
+  ];
 
   const handleCreateThread = () => {
     createThread();
@@ -77,12 +89,13 @@ export function MobileBottomDrawer() {
           </div>
 
           <div className="flex items-center justify-center gap-6 border-t border-line-primary px-4 py-3">
-            {bottomIcons.map(({ icon: Icon, label }) => (
+            {BOTTOM_ICONS.map(({ icon: Icon, label, onClick }) => (
               <Button
                 key={label}
                 variant="ghost"
                 size="icon"
                 className="h-10 w-10 text-icon-default hover:text-icon-active"
+                onClick={onClick}
               >
                 <Icon className="h-5 w-5" />
                 <span className="sr-only">{label}</span>
@@ -91,6 +104,7 @@ export function MobileBottomDrawer() {
           </div>
         </DrawerContent>
       </Drawer>
+      <SettingsDialog open={settingsOpen} onOpenChange={setSettingsOpen} />
     </div>
   );
 }
