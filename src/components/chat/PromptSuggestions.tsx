@@ -2,7 +2,8 @@
 
 import { Button } from "@/components/ui/button";
 import { CornerRightUp, LightbulbIcon, RefreshCwIcon } from "lucide-react";
-import { useCallback, useMemo, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface PromptCard {
   title: string;
@@ -63,15 +64,7 @@ const PROMPT_CARDS: PromptCard[] = [
 ];
 
 const CARDS_PER_ROW = 2;
-
-function shuffle<T>(arr: T[]): T[] {
-  const copy = [...arr];
-  for (let i = copy.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [copy[i], copy[j]] = [copy[j], copy[i]];
-  }
-  return copy;
-}
+const AUTO_SLIDE_INTERVAL = 5000;
 
 interface PromptSuggestionsProps {
   rows?: number;
@@ -83,22 +76,47 @@ export function PromptSuggestions({
   onSelect,
 }: PromptSuggestionsProps) {
   const count = rows * CARDS_PER_ROW;
-  const [shuffled, setShuffled] = useState(() => shuffle(PROMPT_CARDS));
+  const totalPages = Math.ceil(PROMPT_CARDS.length / count);
 
-  const visibleCards = useMemo(
-    () => shuffled.slice(0, count),
-    [shuffled, count],
-  );
+  const [page, setPage] = useState(0);
+  const [direction, setDirection] = useState(1);
+
+  const visibleCards = PROMPT_CARDS.slice(page * count, page * count + count);
+
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const startTimer = useCallback(() => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setPage((prev) => (prev + 1) % totalPages);
+    }, AUTO_SLIDE_INTERVAL);
+  }, [totalPages]);
+
+  const goNext = useCallback(() => {
+    setDirection(1);
+    setPage((prev) => (prev + 1) % totalPages);
+    startTimer();
+  }, [totalPages, startTimer]);
 
   const handleShuffle = useCallback(() => {
-    setShuffled(shuffle(PROMPT_CARDS));
-  }, []);
+    goNext();
+  }, [goNext]);
+
+  useEffect(() => {
+    startTimer();
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [startTimer]);
 
   return (
     <div className="mt-10 space-y-2">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-          <LightbulbIcon className="size-4" />
+          <LightbulbIcon
+            className="size-5 text-red-500"
+            fill={"currentColor"}
+          />
           <span>이런 예시를 시도해 보세요</span>
         </div>
         <Button
@@ -112,23 +130,34 @@ export function PromptSuggestions({
         </Button>
       </div>
 
-      <div className="grid grid-cols-2 gap-2">
-        {visibleCards.map((card) => (
-          <Button
-            key={card.title}
-            variant="ghost"
-            className="group relative h-auto w-full flex-col items-start whitespace-normal rounded-lg border border-border p-3 text-left transition-colors hover:bg-accent"
-            onClick={() => onSelect?.(card.description)}
+      <div className="overflow-hidden">
+        <AnimatePresence mode="popLayout" initial={false}>
+          <motion.div
+            key={page}
+            className="grid grid-cols-2 gap-2"
+            initial={{ x: direction * 10, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: direction * -10, opacity: 0 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
           >
-            <CornerRightUp className="absolute right-2.5 top-2.5 size-3.5 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
-            <div>
-              <p className="text-sm font-semibold">{card.title}</p>
-              <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">
-                {card.description}
-              </p>
-            </div>
-          </Button>
-        ))}
+            {visibleCards.map((card) => (
+              <Button
+                key={card.title}
+                variant="ghost"
+                className="group relative h-auto w-full flex-col items-start whitespace-normal rounded-lg border border-border p-3 text-left transition-colors hover:bg-accent"
+                onClick={() => onSelect?.(card.description)}
+              >
+                <CornerRightUp className="absolute right-2.5 top-2.5 size-3.5 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+                <div>
+                  <p className="text-sm font-semibold">{card.title}</p>
+                  <p className="mt-1 line-clamp-2 text-xs/6 text-muted-foreground">
+                    {card.description}
+                  </p>
+                </div>
+              </Button>
+            ))}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );

@@ -22,6 +22,11 @@ export function ChatArea() {
           <h1 className="text-4xl font-bold text-fg-primary">AISE 3.0</h1>
         </div>
         <ChatInput />
+        <div className="text-xs/5 tracking-normal flex flex-col justify-center items-center">
+          <div className="text-muted-foreground">
+            AISE can make mistakes. Check important info.
+          </div>
+        </div>
         <PromptSuggestions rows={1} onSelect={setInputValue} />
       </div>
     </div>

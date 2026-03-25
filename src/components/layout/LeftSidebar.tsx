@@ -9,7 +9,7 @@ import {
 import { useChatStore } from "@/stores/chat-store";
 import { usePanelStore } from "@/stores/panel-store";
 import {
-  Calendar,
+  Box,
   CircleHelp,
   PanelLeftClose,
   PanelLeftOpen,
@@ -20,8 +20,8 @@ import { AnimatePresence, motion } from "motion/react";
 import { Button } from "../ui/button";
 
 const bottomIcons = [
-  { icon: SlidersHorizontal, label: "설정" },
-  { icon: Calendar, label: "캘린더" },
+  { icon: SlidersHorizontal, label: "앱 설정" },
+  { icon: Box, label: "프로젝트" },
   { icon: CircleHelp, label: "도움말" },
 ];
 
@@ -73,14 +73,19 @@ export function LeftSidebar() {
 
             <div className="mt-auto flex items-center justify-center gap-4 border-t border-line-primary pt-3">
               {bottomIcons.map(({ icon: Icon, label }) => (
-                <Button
-                  key={label}
-                  variant="ghost"
-                  size="icon"
-                  className="text-icon-default hover:text-icon-active"
-                >
-                  <Icon className="h-5 w-5" />
-                </Button>
+                <Tooltip key={label}>
+                  <TooltipTrigger asChild>
+                    <Button
+                      key={label}
+                      variant="ghost"
+                      size="icon"
+                      className="text-icon-default hover:text-icon-active"
+                    >
+                      <Icon className="h-5 w-5" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent side="top">{label}</TooltipContent>
+                </Tooltip>
               ))}
             </div>
           </div>
