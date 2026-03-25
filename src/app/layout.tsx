@@ -1,3 +1,4 @@
+import { OverlayProvider } from "@/components/providers/OverlayProvider";
 import { StoreProvider } from "@/components/providers/StoreProvider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { fontVariables } from "@/lib/fonts";
@@ -51,7 +52,10 @@ export default function RootLayout({
             enableSystem
             storageKey="aise-theme"
           >
-            <TooltipProvider>{children}</TooltipProvider>
+            <TooltipProvider>
+              {children}
+              <OverlayProvider />
+            </TooltipProvider>
           </ThemeProvider>
         </StoreProvider>
       </body>

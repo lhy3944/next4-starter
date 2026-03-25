@@ -10,16 +10,11 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import type { ConfirmOptions } from "@/stores/overlay-store";
 
-interface ConfirmDialogProps {
+interface ConfirmDialogProps extends ConfirmOptions {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  title: string;
-  description: string;
-  confirmLabel?: string;
-  cancelLabel?: string;
-  onConfirm: () => void;
-  variant?: "default" | "destructive";
 }
 
 export function ConfirmDialog({
@@ -29,23 +24,40 @@ export function ConfirmDialog({
   description,
   confirmLabel = "확인",
   cancelLabel = "취소",
-  onConfirm,
   variant = "default",
+  onConfirm,
+  onCancel,
 }: ConfirmDialogProps) {
+  const handleCancel = () => {
+    onCancel?.();
+    onOpenChange(false);
+  };
+
+  const handleConfirm = () => {
+    onConfirm();
+    onOpenChange(false);
+  };
+
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent className="max-w-[420px]">
         <AlertDialogHeader>
-          <AlertDialogTitle className="text-fg-primary">{title}</AlertDialogTitle>
-          <AlertDialogDescription className="text-fg-secondary">
-            {description}
-          </AlertDialogDescription>
+          <AlertDialogTitle className="text-fg-primary">
+            {title}
+          </AlertDialogTitle>
+          {description && (
+            <AlertDialogDescription className="text-primary">
+              {description}
+            </AlertDialogDescription>
+          )}
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>{cancelLabel}</AlertDialogCancel>
+          <AlertDialogCancel onClick={handleCancel}>
+            {cancelLabel}
+          </AlertDialogCancel>
           <AlertDialogAction
-            onClick={onConfirm}
-            className={variant === "destructive" ? "bg-destructive text-destructive-foreground hover:bg-destructive/90" : ""}
+            onClick={handleConfirm}
+            variant={variant === "destructive" ? "destructive" : "default"}
           >
             {confirmLabel}
           </AlertDialogAction>

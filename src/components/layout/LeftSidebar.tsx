@@ -1,6 +1,7 @@
 "use client";
 
 import { ThreadList } from "@/components/chat/ThreadList";
+import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
@@ -17,18 +18,35 @@ import {
   SlidersHorizontal,
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import { Button } from "../ui/button";
-
-const bottomIcons = [
-  { icon: SlidersHorizontal, label: "앱 설정" },
-  { icon: Box, label: "프로젝트" },
-  { icon: CircleHelp, label: "도움말" },
-];
 
 export function LeftSidebar() {
   const createThread = useChatStore((s) => s.createThread);
   const leftSidebarOpen = usePanelStore((s) => s.leftSidebarOpen);
   const toggleLeftSidebar = usePanelStore((s) => s.toggleLeftSidebar);
+
+  const BOTTOM_ICONS = [
+    {
+      icon: SlidersHorizontal,
+      label: "앱 설정",
+      onClick: () => {
+        // TODO 앱 설정 Dialog
+      },
+    },
+    {
+      icon: Box,
+      label: "프로젝트",
+      onClick: () => {
+        // TODO Simple 프로젝트 설정 Dialog
+      },
+    },
+    {
+      icon: CircleHelp,
+      label: "도움말",
+      onClick: () => {
+        // TODO 앱 도움말 Dialog
+      },
+    },
+  ];
 
   return (
     <AnimatePresence mode="popLayout">
@@ -68,18 +86,17 @@ export function LeftSidebar() {
               </Button>
             </div>
 
-            {/* 대화 목록 */}
             <ThreadList />
 
             <div className="mt-auto flex items-center justify-center gap-4 border-t border-line-primary pt-3">
-              {bottomIcons.map(({ icon: Icon, label }) => (
+              {BOTTOM_ICONS.map(({ icon: Icon, label, onClick }) => (
                 <Tooltip key={label}>
                   <TooltipTrigger asChild>
                     <Button
-                      key={label}
                       variant="ghost"
                       size="icon"
                       className="text-icon-default hover:text-icon-active"
+                      onClick={onClick}
                     >
                       <Icon className="h-5 w-5" />
                     </Button>
@@ -106,7 +123,7 @@ export function LeftSidebar() {
           }}
           className="h-full shrink-0 overflow-hidden"
         >
-          <div className="flex w-15 h-full flex-col items-center justify-between border-r py-4">
+          <div className="flex w-[60px] h-full flex-col items-center justify-between border-r py-4">
             <div className="flex flex-col items-center gap-2">
               <Button
                 onClick={toggleLeftSidebar}
@@ -116,7 +133,6 @@ export function LeftSidebar() {
               >
                 <PanelLeftOpen className="h-5 w-5" />
               </Button>
-
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
@@ -132,13 +148,14 @@ export function LeftSidebar() {
               </Tooltip>
             </div>
             <div className="flex flex-col items-center gap-2">
-              {bottomIcons.map(({ icon: Icon, label }) => (
+              {BOTTOM_ICONS.map(({ icon: Icon, label, onClick }) => (
                 <Tooltip key={label}>
                   <TooltipTrigger asChild>
                     <Button
                       variant="ghost"
                       size="icon"
                       className="h-9 w-9 text-icon-default hover:text-icon-active"
+                      onClick={onClick}
                     >
                       <Icon className="h-5 w-5" />
                     </Button>
