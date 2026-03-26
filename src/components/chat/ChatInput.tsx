@@ -1,6 +1,17 @@
 "use client";
 
 import {
+  Attachment,
+  AttachmentHoverCard,
+  AttachmentHoverCardContent,
+  AttachmentHoverCardTrigger,
+  AttachmentInfo,
+  AttachmentPreview,
+  AttachmentRemove,
+  Attachments,
+  getMediaCategory,
+} from "@/components/ui/ai-elements/attachments";
+import {
   PromptInput,
   PromptInputBody,
   PromptInputButton,
@@ -13,7 +24,53 @@ import {
 import { cn } from "@/lib/utils";
 import { useChatStore } from "@/stores/chat-store";
 import { MicIcon, PaperclipIcon } from "lucide-react";
+import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
+
+function AttachmentsDisplay() {
+  const attachments = usePromptInputAttachments();
+
+  if (attachments.files.length === 0) {
+    return null;
+  }
+
+  return (
+    <Attachments variant="inline" className="w-full p-2">
+      {attachments.files.map((file) => {
+        const isImage = getMediaCategory(file) === "image";
+        return (
+          <AttachmentHoverCard key={file.id}>
+            <AttachmentHoverCardTrigger asChild>
+              <Attachment
+                data={file}
+                onRemove={() => attachments.remove(file.id)}
+              >
+                <div className="relative size-5 shrink-0">
+                  <div className="absolute inset-0 transition-opacity group-hover:opacity-0">
+                    <AttachmentPreview />
+                  </div>
+                </div>
+                <AttachmentRemove className="absolute" />
+                <AttachmentInfo />
+              </Attachment>
+            </AttachmentHoverCardTrigger>
+            {isImage && file.type === "file" && file.url && (
+              <AttachmentHoverCardContent>
+                <Image
+                  src={file.url}
+                  alt={file.filename ?? "Preview"}
+                  width={220}
+                  height={220}
+                  className="max-h-60 max-w-60 rounded object-contain"
+                />
+              </AttachmentHoverCardContent>
+            )}
+          </AttachmentHoverCard>
+        );
+      })}
+    </Attachments>
+  );
+}
 
 function AttachButton() {
   const attachments = usePromptInputAttachments();
@@ -103,7 +160,10 @@ function VoiceButton() {
     <PromptInputButton
       tooltip={{ content: "마이크", shortcut: "⌘M", side: "bottom" }}
       onClick={handleClick}
-      className={cn(isListening && "bg-canvas-surface text-accent-primary hover:bg-canvas-surface")}
+      className={cn(
+        isListening &&
+          "bg-canvas-surface text-accent-primary hover:bg-canvas-surface",
+      )}
     >
       <MicIcon size={16} className={cn(isListening && "animate-pulse")} />
     </PromptInputButton>
@@ -116,11 +176,13 @@ export function ChatInput() {
 
   const handleSubmit = () => {
     // Handle submit
+    console.log("handleSubmit");
   };
 
   return (
-    <PromptInput onSubmit={handleSubmit}>
+    <PromptInput globalDrop multiple maxFiles={5} onSubmit={handleSubmit}>
       <PromptInputBody>
+        <AttachmentsDisplay />
         <PromptInputTextarea
           autoFocus
           value={inputValue}

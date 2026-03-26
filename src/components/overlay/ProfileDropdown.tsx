@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LifeBuoy, LogOut, Settings, User } from "lucide-react";
+import { LogOut, Settings, User } from "lucide-react";
 import { useState } from "react";
 
 interface ProfileDropdownProps {

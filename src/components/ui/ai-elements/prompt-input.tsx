@@ -55,8 +55,6 @@ import type {
   ChangeEventHandler,
   ClipboardEventHandler,
   ComponentProps,
-  FormEvent,
-  FormEventHandler,
   HTMLAttributes,
   KeyboardEventHandler,
   PropsWithChildren,
@@ -507,7 +505,7 @@ export type PromptInputProps = Omit<
   }) => void;
   onSubmit: (
     message: PromptInputMessage,
-    event: FormEvent<HTMLFormElement>,
+    event: React.SyntheticEvent<HTMLFormElement, SubmitEvent>,
   ) => void | Promise<void>;
 };
 
@@ -841,8 +839,8 @@ export const PromptInput = ({
     [referencedSources, clearReferencedSources],
   );
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = useCallback(
-    async (event) => {
+  const handleSubmit = useCallback(
+    async (event: React.SyntheticEvent<HTMLFormElement, SubmitEvent>) => {
       event.preventDefault();
 
       const form = event.currentTarget;
@@ -862,7 +860,7 @@ export const PromptInput = ({
       try {
         // Convert blob URLs to data URLs asynchronously
         const convertedFiles: FileUIPart[] = await Promise.all(
-          files.map(async ({ id: _id, ...item }) => {
+          files.map(async ({ ...item }) => {
             if (item.url?.startsWith("blob:")) {
               const dataUrl = await convertBlobUrlToDataUrl(item.url);
               // If conversion failed, keep the original blob URL

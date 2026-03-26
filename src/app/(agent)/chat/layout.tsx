@@ -1,6 +1,5 @@
 "use client";
 
-import { Header } from "@/components/layout/Header";
 import { LeftSidebar } from "@/components/layout/LeftSidebar";
 import { MobileBottomDrawer } from "@/components/layout/MobileBottomDrawer";
 import { MobileRightDrawer } from "@/components/layout/MobileRightDrawer";
@@ -41,8 +40,6 @@ export default function ChatLayout({
 
   return (
     <div className="flex h-screen flex-col">
-      <Header showLayoutToggle />
-
       <div ref={containerRef} className="flex flex-1 overflow-hidden">
         {/* Mobile sidebar buttons */}
         {isMobile && (

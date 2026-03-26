@@ -2,7 +2,25 @@
   "permissions": {
     "allow": [
       "Read(//c/Program Files/Git/bin/**)",
-      "WebFetch(domain:ai-sdk.dev)"
+      "WebFetch(domain:ai-sdk.dev)",
+      "Bash(curl -s 'https://elements.ai-sdk.dev/components/prompt-input')",
+      "Bash(npx shadcn@latest add --help)",
+      "Bash(npx shadcn@latest add https://elements.ai-sdk.dev/r/prompt-input-attachments -y)",
+      "Bash(curl -s \"https://elements.ai-sdk.dev/components/prompt-input\")",
+      "Bash(curl -s \"https://elements.ai-sdk.dev/components\")",
+      "Bash(curl -s \"https://elements.ai-sdk.dev/r/attachments.json\")",
+      "Bash(curl -s \"https://elements.ai-sdk.dev/r/prompt-input.json\")",
+      "Bash(curl -sI \"https://elements.ai-sdk.dev/r/prompt-input\")",
+      "Bash(curl -s \"https://elements.ai-sdk.dev/r/prompt-input\")",
+      "Bash(curl -s \"https://elements.ai-sdk.dev/r/attachments\")",
+      "Bash(curl -s \"https://elements.ai-sdk.dev/registry/prompt-input.json\")",
+      "Bash(curl -s \"https://elements.ai-sdk.dev/api/registry/prompt-input\")",
+      "Bash(curl -sI \"https://elements.ai-sdk.dev/registry/prompt-input.json\")",
+      "Bash(curl -s \"https://elements.ai-sdk.dev/r/styles/new-york/attachments.json\")",
+      "Bash(curl -s \"https://elements.ai-sdk.dev/r/styles/default/attachments.json\")",
+      "Bash(curl -s \"https://elements.ai-sdk.dev/components/attachments\")",
+      "Bash(npx shadcn@latest add @ai-elements/attachments -y)",
+      "Bash(npx shadcn@latest add @ai-elements/attachments -y -o)"
     ]
   }
 }
