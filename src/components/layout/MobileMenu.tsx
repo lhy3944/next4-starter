@@ -4,7 +4,13 @@ import { AppsDropdown } from '@/components/overlay/AppsDropdown';
 import { LabsDialog, LabsTrigger } from '@/components/overlay/LabsDialog';
 import { Logo } from '@/components/shared/Logo';
 import { ThemeToggle } from '@/components/shared/ThemeToggle';
+import { SettingsDialog } from '@/components/overlay/SettingsDialog';
 import { Button } from '@/components/ui/button';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 import {
   Drawer,
   DrawerContent,
@@ -13,7 +19,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '@/components/ui/drawer';
-import { headerTabsConfig } from '@/config/navigation';
+import { headerTabsConfig, SIDEBAR_ACTIONS } from '@/config/navigation';
 import { cn } from '@/lib/utils';
 import { Menu } from 'lucide-react';
 import { useTheme } from 'next-themes';
@@ -26,7 +32,19 @@ export function MobileMenu() {
   const [open, setOpen] = useState(false);
 
   const [labsOpen, setLabsOpen] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
+
+  const actionHandlers: Record<string, () => void> = {
+    settings: () => setSettingsOpen(true),
+  };
+
+  const BOTTOM_ICONS = SIDEBAR_ACTIONS
+    .filter((action) => action.id !== 'project')
+    .map((action) => ({
+      ...action,
+      onClick: actionHandlers[action.id] ?? (() => {}),
+    }));
 
   return (
     <>
@@ -80,19 +98,37 @@ export function MobileMenu() {
 
           {/* Bottom */}
           <div className="p-4 border-t border-line-primary flex items-center gap-2">
-            <AppsDropdown contentClassName="bottom-12 left-0 origin-bottom-left" />
-            <LabsTrigger onClick={() => setLabsOpen(true)} />
-            <ThemeToggle
-              checked={resolvedTheme === 'dark'}
-              onCheckedChange={() =>
-                setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
-              }
-            />
+            {BOTTOM_ICONS.map(({ id, icon: Icon, label, onClick }) => (
+              <Tooltip key={id}>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-9 w-9 text-icon-default hover:text-icon-active"
+                    onClick={onClick}
+                  >
+                    <Icon className="h-5 w-5" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent side="top">{label}</TooltipContent>
+              </Tooltip>
+            ))}
+            <div className="ml-auto flex items-center gap-2">
+              <AppsDropdown contentClassName="bottom-12 left-0 origin-bottom-left" />
+              <LabsTrigger onClick={() => setLabsOpen(true)} />
+              <ThemeToggle
+                checked={resolvedTheme === 'dark'}
+                onCheckedChange={() =>
+                  setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
+                }
+              />
+            </div>
           </div>
         </DrawerContent>
       </Drawer>
 
       <LabsDialog open={labsOpen} onOpenChange={setLabsOpen} />
+      <SettingsDialog open={settingsOpen} onOpenChange={setSettingsOpen} />
     </>
   );
 }

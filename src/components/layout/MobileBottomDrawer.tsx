@@ -9,14 +9,9 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "@/components/ui/drawer";
+import { SIDEBAR_ACTIONS } from "@/config/navigation";
 import { useChatStore } from "@/stores/chat-store";
-import {
-  Box,
-  CircleHelp,
-  Ellipsis,
-  Plus,
-  SlidersHorizontal,
-} from "lucide-react";
+import { Ellipsis, Plus } from "lucide-react";
 import { useState } from "react";
 import { SettingsDialog } from "../overlay/SettingsDialog";
 
@@ -25,27 +20,14 @@ export function MobileBottomDrawer() {
   const [open, setOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
 
-  const BOTTOM_ICONS = [
-    {
-      icon: SlidersHorizontal,
-      label: "앱 설정",
-      onClick: () => setSettingsOpen(true),
-    },
-    {
-      icon: Box,
-      label: "프로젝트",
-      onClick: () => {
-        // TODO Simple 프로젝트 설정 Dialog
-      },
-    },
-    {
-      icon: CircleHelp,
-      label: "도움말",
-      onClick: () => {
-        // TODO 앱 도움말 Dialog
-      },
-    },
-  ];
+  const actionHandlers: Record<string, () => void> = {
+    settings: () => setSettingsOpen(true),
+  };
+
+  const BOTTOM_ICONS = SIDEBAR_ACTIONS.map((action) => ({
+    ...action,
+    onClick: actionHandlers[action.id] ?? (() => {}),
+  }));
 
   const handleCreateThread = () => {
     createThread();

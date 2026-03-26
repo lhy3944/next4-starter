@@ -11,13 +11,11 @@ import {
 } from "@/components/ui/tooltip";
 import { useChatStore } from "@/stores/chat-store";
 import { usePanelStore } from "@/stores/panel-store";
+import { SIDEBAR_ACTIONS } from "@/config/navigation";
 import {
-  Box,
-  CircleHelp,
   PanelLeftClose,
   PanelLeftOpen,
   Plus,
-  SlidersHorizontal,
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 
@@ -27,27 +25,14 @@ export function LeftSidebar() {
   const toggleLeftSidebar = usePanelStore((s) => s.toggleLeftSidebar);
   const [settingsOpen, setSettingsOpen] = useState(false);
 
-  const BOTTOM_ICONS = [
-    {
-      icon: SlidersHorizontal,
-      label: "앱 설정",
-      onClick: () => setSettingsOpen(true),
-    },
-    {
-      icon: Box,
-      label: "프로젝트",
-      onClick: () => {
-        // TODO Simple 프로젝트 설정 Dialog
-      },
-    },
-    {
-      icon: CircleHelp,
-      label: "도움말",
-      onClick: () => {
-        // TODO 앱 도움말 Dialog
-      },
-    },
-  ];
+  const actionHandlers: Record<string, () => void> = {
+    settings: () => setSettingsOpen(true),
+  };
+
+  const BOTTOM_ICONS = SIDEBAR_ACTIONS.map((action) => ({
+    ...action,
+    onClick: actionHandlers[action.id] ?? (() => {}),
+  }));
 
   return (
     <>
