@@ -14,7 +14,6 @@ import {
   Box,
   CircleHelp,
   Ellipsis,
-  EllipsisVertical,
   Plus,
   SlidersHorizontal,
 } from "lucide-react";
