@@ -39,7 +39,7 @@ export default function ChatLayout({
   const showRightPanel = rightPanelOpen;
 
   return (
-    <div className="flex h-screen flex-col">
+    <div className="flex flex-1 flex-col">
       <div ref={containerRef} className="flex flex-1 overflow-hidden">
         {/* Mobile sidebar buttons */}
         {isMobile && (

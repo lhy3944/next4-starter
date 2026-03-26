@@ -1,4 +1,3 @@
-import { Header } from "@/components/layout/Header";
 import { OverlayProvider } from "@/components/providers/OverlayProvider";
 import { StoreProvider } from "@/components/providers/StoreProvider";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -54,7 +53,6 @@ export default function RootLayout({
             storageKey="aise-theme"
           >
             <TooltipProvider>
-              <Header showLayoutToggle />
               {children}
               <OverlayProvider />
             </TooltipProvider>

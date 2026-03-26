@@ -90,7 +90,7 @@ export function MobileBottomDrawer() {
             </Button>
           </DrawerHeader>
 
-          <div className="flex max-h-[60vh] overflow-hidden px-2 py-3">
+          <div className="flex h-[50vh] overflow-hidden px-2 py-3">
             <ThreadList />
           </div>
 

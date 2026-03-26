@@ -14,10 +14,7 @@ function ThreadListSkeleton() {
       {SKELETON_WIDTHS.map((width, i) => (
         <div key={i} className="flex items-center gap-2 px-2.5 py-2">
           <Skeleton className="h-3.5 w-3.5 rounded shrink-0" />
-          <Skeleton
-            className="h-3.5 rounded"
-            style={{ width: `${width}%` }}
-          />
+          <Skeleton className="h-3.5 rounded" style={{ width: `${width}%` }} />
         </div>
       ))}
     </div>
