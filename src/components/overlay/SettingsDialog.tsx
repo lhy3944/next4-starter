@@ -94,7 +94,7 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
         showCloseButton={false}
         className={cn(
           "flex flex-col gap-0 p-0 overflow-hidden",
-          "max-md:max-w-[calc(100%-8px)] max-md:h-[70vh]",
+          "max-md:max-w-[calc(100%-8px)] max-md:h-[70dvh]",
           "md:max-w-[720px] md:h-[560px] md:flex-row",
         )}
       >
