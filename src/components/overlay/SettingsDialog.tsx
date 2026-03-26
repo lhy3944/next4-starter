@@ -1,27 +1,25 @@
-'use client';
+"use client";
 
-import { SettingsGeneral } from '@/components/overlay/SettingsGeneral';
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
-import { cn } from '@/lib/utils';
-import type { LucideIcon } from 'lucide-react';
+import { SettingsGeneral } from "@/components/overlay/SettingsGeneral";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { cn } from "@/lib/utils";
+import type { LucideIcon } from "lucide-react";
 import {
   BarChart3,
   CalendarClock,
   Database,
-  Globe,
   Link,
-  Mail,
   Palette,
-  Puzzle,
   Settings,
   Sparkles,
   User,
   X,
-} from 'lucide-react';
-import type { ReactNode } from 'react';
-import { useState } from 'react';
+} from "lucide-react";
+import type { ReactNode } from "react";
+import { useState } from "react";
+import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 
 interface SettingsMenuItem {
   id: string;
@@ -32,72 +30,52 @@ interface SettingsMenuItem {
 
 const SETTINGS_MENU: SettingsMenuItem[] = [
   {
-    id: 'account',
-    label: '계정',
+    id: "account",
+    label: "계정",
     icon: User,
-    content: <p className="text-sm text-fg-muted">계정 설정 (준비 중)</p>,
+    content: <p className="text-sm text-fg-muted">계정 설정</p>,
   },
   {
-    id: 'general',
-    label: '설정',
+    id: "general",
+    label: "설정",
     icon: Settings,
     content: <SettingsGeneral />,
   },
   {
-    id: 'usage',
-    label: '사용량',
+    id: "usage",
+    label: "사용량",
     icon: BarChart3,
-    content: <p className="text-sm text-fg-muted">사용량 (준비 중)</p>,
+    content: <p className="text-sm text-fg-muted">사용량</p>,
   },
   {
-    id: 'schedule',
-    label: '예약 작업',
+    id: "schedule",
+    label: "예약 작업",
     icon: CalendarClock,
-    content: <p className="text-sm text-fg-muted">예약 작업 (준비 중)</p>,
+    content: <p className="text-sm text-fg-muted">예약 작업</p>,
   },
   {
-    id: 'mail',
-    label: 'Mail',
-    icon: Mail,
-    content: <p className="text-sm text-fg-muted">Mail (준비 중)</p>,
-  },
-  {
-    id: 'data',
-    label: '데이터 제어',
+    id: "data",
+    label: "데이터 제어",
     icon: Database,
-    content: <p className="text-sm text-fg-muted">데이터 제어 (준비 중)</p>,
+    content: <p className="text-sm text-fg-muted">데이터 제어</p>,
   },
   {
-    id: 'browser',
-    label: '클라우드 브라우저',
-    icon: Globe,
-    content: (
-      <p className="text-sm text-fg-muted">클라우드 브라우저 (준비 중)</p>
-    ),
-  },
-  {
-    id: 'personalize',
-    label: '개인화',
+    id: "personalize",
+    label: "개인화",
     icon: Palette,
-    content: <p className="text-sm text-fg-muted">개인화 (준비 중)</p>,
+    content: <p className="text-sm text-fg-muted">개인화</p>,
   },
   {
-    id: 'skills',
-    label: '스킬',
+    id: "skills",
+    label: "스킬",
     icon: Sparkles,
-    content: <p className="text-sm text-fg-muted">스킬 (준비 중)</p>,
+    content: <p className="text-sm text-fg-muted">스킬</p>,
   },
   {
-    id: 'connector',
-    label: '커넥터',
-    icon: Puzzle,
-    content: <p className="text-sm text-fg-muted">커넥터 (준비 중)</p>,
-  },
-  {
-    id: 'integration',
-    label: '통합',
+    id: "integration",
+    label: "통합",
     icon: Link,
-    content: <p className="text-sm text-fg-muted">통합 (준비 중)</p>,
+    content: <p className="text-sm text-fg-muted">통합</p>,
   },
 ];
 
@@ -107,7 +85,7 @@ interface SettingsDialogProps {
 }
 
 export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
-  const [activeId, setActiveId] = useState('general');
+  const [activeId, setActiveId] = useState("general");
   const activeItem = SETTINGS_MENU.find((item) => item.id === activeId);
 
   return (
@@ -115,9 +93,9 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
       <DialogContent
         showCloseButton={false}
         className={cn(
-          'flex flex-col gap-0 p-0 overflow-hidden',
-          'max-md:max-w-[calc(100%-2rem)] max-md:h-[85vh]',
-          'md:max-w-[720px] md:h-[560px] md:flex-row',
+          "flex flex-col gap-0 p-0 overflow-hidden",
+          "max-md:max-w-[calc(100%-8px)] max-md:h-[70vh]",
+          "md:max-w-[720px] md:h-[560px] md:flex-row",
         )}
       >
         {/* ── 데스크탑: 좌측 사이드바 ── */}
@@ -141,10 +119,10 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
                   variant="ghost"
                   onClick={() => setActiveId(id)}
                   className={cn(
-                    'justify-start gap-2.5 h-9 px-3 text-sm font-normal',
+                    "justify-start gap-2.5 h-9 px-3 text-sm font-normal",
                     activeId === id
-                      ? 'bg-canvas-surface text-fg-primary'
-                      : 'text-fg-secondary hover:text-fg-primary',
+                      ? "bg-canvas-surface text-fg-primary"
+                      : "text-fg-secondary hover:text-fg-primary",
                   )}
                 >
                   <Icon className="size-4 shrink-0" />
@@ -172,22 +150,20 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
           </div>
           <div className="relative">
             <ScrollArea className="w-full">
-              <div className="flex items-center gap-1 px-4 pb-2 pr-8">
-                {SETTINGS_MENU.map(({ id, label }) => (
-                  <button
-                    key={id}
-                    type="button"
-                    onClick={() => setActiveId(id)}
-                    className={cn(
-                      'shrink-0 rounded-md px-3 py-1.5 text-sm transition-colors whitespace-nowrap',
-                      activeId === id
-                        ? 'bg-canvas-surface text-fg-primary font-medium'
-                        : 'text-fg-secondary hover:text-fg-primary',
-                    )}
-                  >
-                    {label}
-                  </button>
-                ))}
+              <div className="flex items-center gap-1 px-4 pb-[10px] pr-8">
+                <Tabs defaultValue="overview">
+                  <TabsList variant={"line"}>
+                    {SETTINGS_MENU.map(({ id, label }) => (
+                      <TabsTrigger
+                        key={id}
+                        value={id}
+                        onClick={() => setActiveId(id)}
+                      >
+                        {label}
+                      </TabsTrigger>
+                    ))}
+                  </TabsList>
+                </Tabs>
               </div>
               <ScrollBar orientation="horizontal" />
             </ScrollArea>

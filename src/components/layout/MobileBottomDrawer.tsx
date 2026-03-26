@@ -1,18 +1,25 @@
-'use client';
+"use client";
 
-import { ThreadList } from '@/components/chat/ThreadList';
-import { Button } from '@/components/ui/button';
+import { ThreadList } from "@/components/chat/ThreadList";
+import { Button } from "@/components/ui/button";
 import {
   Drawer,
   DrawerContent,
   DrawerDescription,
   DrawerHeader,
   DrawerTitle,
-} from '@/components/ui/drawer';
-import { useChatStore } from '@/stores/chat-store';
-import { Box, CircleHelp, List, Plus, SlidersHorizontal } from 'lucide-react';
-import { useState } from 'react';
-import { SettingsDialog } from '../overlay/SettingsDialog';
+} from "@/components/ui/drawer";
+import { useChatStore } from "@/stores/chat-store";
+import {
+  Box,
+  CircleHelp,
+  Ellipsis,
+  EllipsisVertical,
+  Plus,
+  SlidersHorizontal,
+} from "lucide-react";
+import { useState } from "react";
+import { SettingsDialog } from "../overlay/SettingsDialog";
 
 export function MobileBottomDrawer() {
   const createThread = useChatStore((s) => s.createThread);
@@ -22,19 +29,19 @@ export function MobileBottomDrawer() {
   const BOTTOM_ICONS = [
     {
       icon: SlidersHorizontal,
-      label: '앱 설정',
+      label: "앱 설정",
       onClick: () => setSettingsOpen(true),
     },
     {
       icon: Box,
-      label: '프로젝트',
+      label: "프로젝트",
       onClick: () => {
         // TODO Simple 프로젝트 설정 Dialog
       },
     },
     {
       icon: CircleHelp,
-      label: '도움말',
+      label: "도움말",
       onClick: () => {
         // TODO 앱 도움말 Dialog
       },
@@ -64,7 +71,7 @@ export function MobileBottomDrawer() {
           size="icon"
           className="h-9 w-9 text-icon-default hover:text-icon-active"
         >
-          <List className="h-5 w-5" />
+          <Ellipsis className="h-5 w-5" />
         </Button>
 
         <DrawerContent className="max-h-[85vh] bg-canvas-primary">

@@ -17,16 +17,17 @@ export function Header({ showLayoutToggle = false }: HeaderProps) {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 flex h-15 shrink-0 items-center border-b border-line-primary md:px-6 backdrop-blur-xl",
+        "sticky top-0 z-50 flex h-15 shrink-0 items-center border-b border-line-primary backdrop-blur-xl",
       )}
     >
       <div
         className={cn(
-          "w-full mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between transition-[max-width] duration-300 ease-in-out",
+          "w-full mx-auto px-2 sm:px-6 lg:px-8 h-full flex items-center justify-between transition-[max-width] duration-300 ease-in-out",
           fullWidthMode ? "max-w-full" : "max-w-6xl",
         )}
       >
         <div className="flex flex-1 items-center">
+          <MobileMenu />
           <Logo />
         </div>
 
@@ -36,7 +37,6 @@ export function Header({ showLayoutToggle = false }: HeaderProps) {
 
         <div className="flex flex-1 items-center justify-end gap-1">
           <HeaderActions showLayoutToggle={showLayoutToggle} />
-          <MobileMenu />
         </div>
       </div>
     </header>
