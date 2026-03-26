@@ -9,10 +9,65 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
+import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
 
+const THEME_OPTIONS = [
+  { value: "light", label: "라이트" },
+  { value: "dark", label: "다크" },
+  { value: "system", label: "시스템 따르기" },
+] as const;
+
+function ThemePreview({ mode }: { mode: "light" | "dark" }) {
+  const isLight = mode === "light";
+  return (
+    <div
+      className={cn(
+        "flex h-12 w-full flex-col gap-1.5 rounded-md border p-2 max-w-20",
+        isLight ? "border-gray-200 bg-gray-100" : "border-gray-700 bg-gray-800",
+      )}
+    >
+      <div
+        className={cn(
+          "h-1.5 w-3/4 rounded-sm",
+          isLight ? "bg-gray-300" : "bg-gray-600",
+        )}
+      />
+      <div
+        className={cn(
+          "h-1.5 w-1/2 rounded-sm",
+          isLight ? "bg-gray-300" : "bg-gray-600",
+        )}
+      />
+      <div
+        className={cn(
+          "h-1.5 w-2/3 rounded-sm",
+          isLight ? "bg-gray-300" : "bg-gray-600",
+        )}
+      />
+    </div>
+  );
+}
+
+function SystemThemePreview() {
+  return (
+    <div className="flex h-12 w-full overflow-hidden rounded-md border border-gray-500">
+      <div className="flex w-1/2 flex-col gap-1.5 bg-gray-100 p-2">
+        <div className="h-1.5 w-3/4 rounded-sm bg-gray-300" />
+        <div className="h-1.5 w-1/2 rounded-sm bg-gray-300" />
+        <div className="h-1.5 w-2/3 rounded-sm bg-gray-300" />
+      </div>
+      <div className="flex w-1/2 flex-col gap-1.5 bg-gray-800 p-2">
+        <div className="h-1.5 w-3/4 rounded-sm bg-gray-600" />
+        <div className="h-1.5 w-1/2 rounded-sm bg-gray-600" />
+        <div className="h-1.5 w-2/3 rounded-sm bg-gray-600" />
+      </div>
+    </div>
+  );
+}
+
 export function SettingsGeneral() {
-  const { resolvedTheme, setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
 
   return (
     <div className="flex flex-col gap-6">
@@ -31,15 +86,41 @@ export function SettingsGeneral() {
               </SelectContent>
             </Select>
           </div>
-          <div className="flex items-center justify-between">
-            <Label className="text-sm text-fg-secondary">다크 모드</Label>
-            <Switch
-              checked={resolvedTheme === "dark"}
-              onCheckedChange={() =>
-                setTheme(resolvedTheme === "dark" ? "light" : "dark")
-              }
-            />
-          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 className="text-sm font-semibold text-fg-primary mb-4">외관</h3>
+        <div className="grid grid-cols-3 gap-3 px-4">
+          {THEME_OPTIONS.map(({ value, label }) => (
+            <button
+              key={value}
+              type="button"
+              onClick={() => setTheme(value)}
+              className={cn(
+                "flex flex-col items-center gap-2 rounded-lg p-2 transition-colors",
+                theme === value
+                  ? "ring-2 ring-accent-primary bg-canvas-surface"
+                  : "hover:bg-canvas-surface/50",
+              )}
+            >
+              {value === "system" ? (
+                <SystemThemePreview />
+              ) : (
+                <ThemePreview mode={value} />
+              )}
+              <span
+                className={cn(
+                  "text-xs",
+                  theme === value
+                    ? "text-accent-primary font-medium"
+                    : "text-fg-secondary",
+                )}
+              >
+                {label}
+              </span>
+            </button>
+          ))}
         </div>
       </div>
 
