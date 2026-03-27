@@ -114,7 +114,7 @@ export function MobileMenu() {
               </Tooltip>
             ))}
             <div className="ml-auto flex items-center gap-2">
-              <AppsDropdown contentClassName="bottom-12 left-0 origin-bottom-left" />
+              <AppsDropdown contentClassName="fixed bottom-20 left-4 right-4 !w-auto origin-bottom" />
               <LabsTrigger onClick={() => setLabsOpen(true)} />
               <ThemeToggle
                 checked={resolvedTheme === 'dark'}
